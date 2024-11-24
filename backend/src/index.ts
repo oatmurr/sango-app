@@ -1,33 +1,47 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import { EnkaClient } from "enka-network-api";
 
+const enka = new EnkaClient({ showFetchCacheLog: true }); // showFetchCacheLog is true by default
+
 const app = express();
-const PORT = 3001;
+const port = 3000;
 
-// initialise EnkaClient
-const enkaClient = new EnkaClient();
+app.get("/fetch-characters", (req, res) => {
+    const characters = enka.getAllCharacters();
 
-app.get("/fetch-user/:uid", async (req: Request, res: Response) => {
-    const { uid } = req.params;
+    const data = characters.map((c) => ({
+        name: c.name.get(),
+        element: c.element ? c.element.name.get() : null,
+    }));
 
-    try {
-        // fetch user data from Enka API
-        const userData = await enkaClient.fetchUser(uid);
-
-        // log to console
-        console.log("fetched user data", userData);
-
-        // send response to client
-        res.json(userData);
-    } catch (error) {
-        // log error to console
-        console.error("error fetching user data", error);
-
-        // send error response to client
-        res.status(500).json("failed to fetch user data");
-    }
+    res.send(data);
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.get("/fetch-weapons", (req, res) => {
+    const weapons = enka.getAllWeapons();
+
+    const data = weapons.map((w) => ({
+        name: w.name.get(),
+        type: w.weaponType,
+    }));
+
+    res.send(data);
+});
+
+app.get("/u/:uid", async (req, res) => {
+    const uid = req.params;
+
+    const userData = await enka.fetchUser(uid.uid);
+
+    const data = {
+        level: userData.level,
+        nickname: userData.nickname,
+        worldLevel: userData.worldLevel,
+    };
+
+    res.json(data);
+});
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
 });
