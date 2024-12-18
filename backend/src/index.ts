@@ -1,5 +1,5 @@
 import express from "express";
-import { EnkaClient } from "enka-network-api";
+import { EnkaClient, ArtifactSet } from "enka-network-api";
 
 const enka = new EnkaClient({ showFetchCacheLog: true }); // showFetchCacheLog is true by default
 
@@ -29,10 +29,11 @@ app.get("/fetch-weapons", (req, res) => {
 });
 
 app.get("/u/:uid", async (req, res) => {
+    // step -1: fetch user data
     const uid = req.params;
-
     const user = await enka.fetchUser(uid.uid);
 
+    // step 0: get characters
     const characters = user.characters;
 
     if (characters.length === 0) {
@@ -42,24 +43,91 @@ app.get("/u/:uid", async (req, res) => {
 
     // yuko1101 artifactStatsAndSetBonuses.js
 
-    // crit multipliers
-    const critMultipliers: { [key: string]: number } = {
-        // crit rate
-        FIGHT_PROP_CRITICAL: 2,
-        // crit dmg
-        FIGHT_PROP_CRITICAL_HURT: 1,
-    };
-
     const data = characters.map((c) => {
-        const name = c.characterData.name.get();
-        const artifacts = c.artifacts;
+        // step 1: attributes
+        const attributes = {
+            name: c.characterData.name.get(),
+            level: c.level,
+            maxLevel: c.maxLevel,
+            friendship: c.friendship,
+            statsList: c.stats.statProperties.map((stats) => {
+                return ` - ${stats.fightPropName.get()}: ${stats.valueText}`;
+            }),
+        };
 
-        // get mainstats and substats of all five artifacts for this character
-        const mainstats = artifacts.map((a) => a.mainstat);
-        const substats = artifacts.flatMap((a) => a.substats.total);
+        // step 2: weapon
+        const weapon = {
+            name: c.weapon.weaponData.name.get(),
+            refinementRank: c.weapon.refinementRank,
+            level: c.weapon.level,
+            maxLevel: c.weapon.maxLevel,
+            weaponStats: c.weapon.weaponStats.map((stat) => ({
+                prop: stat.fightProp,
+                value: stat.value,
+            })),
+        };
 
-        // calculate crit value
-        const critValue = [...mainstats, ...substats]
+        // step 3: artifacts
+
+        // get active set bonuses for the entire set of artifacts
+        const setBonuses = ArtifactSet.getActiveSetBonus(c.artifacts);
+        const activeBonuses = setBonuses
+            .filter((set) => set.activeBonus.length > 0)
+            .flatMap((set) => set.activeBonus)
+            .map((bonus) => ({
+                description: bonus.description.get(),
+            }));
+
+        const artifacts = c.artifacts.map((a) => {
+            const mainstat = {
+                prop: a.mainstat.fightProp,
+                value: a.mainstat.value,
+            };
+            const substats = a.substats.total.map((s) => ({
+                prop: s.fightProp,
+                value: s.value,
+            }));
+
+            return {
+                mainstat,
+                substats,
+                activeBonuses,
+            };
+        });
+
+        // step 4: constellation
+        const constellation = c.unlockedConstellations.length;
+
+        // step 5: talents - not working
+        // const skillLevels = c.skillLevels.map((t) => ({
+        //     name: t.skill.name.get(),
+        //     level: t.level,
+        // }));
+
+        // // extract unlocked passive talents
+        // const unlockedPassiveTalents = c.unlockedPassiveTalents.map((t) => ({
+        //     name: t.name.get(),
+        // }));
+
+        // // combine skill levels and unlocked passive talents
+        // const talents = {
+        //     skillLevels,
+        //     unlockedPassiveTalents,
+        // };
+
+        // step 6: calculate crit value (for sorting) - copied from yuko
+        const critMultipliers: { [key: string]: number } = {
+            // crit rate
+            FIGHT_PROP_CRITICAL: 2,
+            // crit dmg
+            FIGHT_PROP_CRITICAL_HURT: 1,
+        };
+
+        // mainstats and substats of all artifacts for this character for crit value calcs
+        const mainstatsCV = c.artifacts.map((a) => a.mainstat);
+        const substatsCV = c.artifacts.flatMap((a) => a.substats.total);
+
+        const critValue = [...mainstatsCV, ...substatsCV]
             .filter((stat) =>
                 Object.keys(critMultipliers).includes(stat.fightProp)
             )
@@ -70,12 +138,16 @@ app.get("/u/:uid", async (req, res) => {
             )
             .reduce((a, b) => a + b);
 
-        // round crit value to 3 decimal places
-        const roundedCritValue = parseFloat(critValue.toFixed(3));
+        // round crit value to 3 decimal places, the reason i am storing this separately is because this is how i eventually want to sort builds by.
+        // const roundedCritValue = parseFloat(critValue.toFixed(3));
 
         return {
-            name,
-            roundedCritValue,
+            attributes,
+            weapon,
+            constellation,
+            artifacts,
+            // talents,
+            critValue,
         };
     });
 
