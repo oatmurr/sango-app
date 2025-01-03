@@ -1,17 +1,39 @@
 import express from "express";
 import { EnkaClient, ArtifactSet } from "enka-network-api";
+import fs from "fs";
+import { dbInit } from "./db";
 
-const enka = new EnkaClient({ showFetchCacheLog: true }); // showFetchCacheLog is true by default
+export const enka = new EnkaClient({ showFetchCacheLog: true }); // showFetchCacheLog is true by default
+
+enka.cachedAssetsManager.fetchAllContents(); // returns promise
+enka.cachedAssetsManager.refreshAllData();
 
 const app = express();
 const port = 3000;
+
+dbInit();
+
+// https://enka-network-api.vercel.app/docs
+// enka.cachedAssetsManager.activateAutoCacheUpdater({
+//     instant: true, // Run the first update check immediately
+//     timeout: 60 * 60 * 1000, // 1 hour interval
+//     onUpdateStart: async () => {
+//         console.log("Updating Genshin Data...");
+//     },
+//     onUpdateEnd: async () => {
+//         enka.cachedAssetsManager.refreshAllData(); // Refresh memory
+//         console.log("Updating Completed!");
+//     },
+// });
 
 app.get("/fetch-characters", (req, res) => {
     const characters = enka.getAllCharacters();
 
     const data = characters.map((c) => ({
         name: c.name.get(),
+        id: c.id,
         element: c.element ? c.element.name.get() : null,
+        weaponType: c.weaponType,
     }));
 
     res.send(data);
@@ -22,7 +44,21 @@ app.get("/fetch-weapons", (req, res) => {
 
     const data = weapons.map((w) => ({
         name: w.name.get(),
+        id: w.id,
         type: w.weaponType,
+    }));
+
+    res.send(data);
+});
+
+app.get("/fetch-artifacts", (req, res) => {
+    const artifacts = enka.getAllArtifacts();
+
+    const data = artifacts.map((a) => ({
+        name: a.name.get(),
+        type: a.equipType,
+        id: a.id,
+        set: a.set.name.get(),
     }));
 
     res.send(data);
@@ -35,6 +71,9 @@ app.get("/u/:uid", async (req, res) => {
 
     // step 0: get characters
     const characters = user.characters;
+
+    // testing
+    // const c = characters[9];
 
     if (characters.length === 0) {
         res.json({ message: "no characters found" });
@@ -99,21 +138,23 @@ app.get("/u/:uid", async (req, res) => {
         const constellation = c.unlockedConstellations.length;
 
         // step 5: talents - not working
-        // const skillLevels = c.skillLevels.map((t) => ({
-        //     name: t.skill.name.get(),
-        //     level: t.level,
-        // }));
+        const skillLevels = c.skillLevels.map((t) => ({
+            name: t.skill.name.get(),
+            level: t.level,
+        }));
 
-        // // extract unlocked passive talents
-        // const unlockedPassiveTalents = c.unlockedPassiveTalents.map((t) => ({
-        //     name: t.name.get(),
-        // }));
+        // extract unlocked passive talents
+        const unlockedPassiveTalents = c.unlockedPassiveTalents
+            .filter((t) => !t.isHidden)
+            .map((t) => ({
+                name: t.name.get(),
+            }));
 
-        // // combine skill levels and unlocked passive talents
-        // const talents = {
-        //     skillLevels,
-        //     unlockedPassiveTalents,
-        // };
+        // combine skill levels and unlocked passive talents
+        const talents = {
+            skillLevels,
+            unlockedPassiveTalents,
+        };
 
         // step 6: calculate crit value (for sorting) - copied from yuko
         const critMultipliers: { [key: string]: number } = {
@@ -127,16 +168,21 @@ app.get("/u/:uid", async (req, res) => {
         const mainstatsCV = c.artifacts.map((a) => a.mainstat);
         const substatsCV = c.artifacts.flatMap((a) => a.substats.total);
 
-        const critValue = [...mainstatsCV, ...substatsCV]
-            .filter((stat) =>
-                Object.keys(critMultipliers).includes(stat.fightProp)
-            )
-            .map(
-                (stat) =>
-                    stat.getMultipliedValue() *
-                    (critMultipliers[stat.fightProp] || 0)
-            )
-            .reduce((a, b) => a + b);
+        let critValue = 0;
+
+        // if there are artifacts equipped, calculate crit value
+        if (mainstatsCV.length + substatsCV.length > 0) {
+            critValue = [...mainstatsCV, ...substatsCV]
+                .filter((stat) =>
+                    Object.keys(critMultipliers).includes(stat.fightProp)
+                )
+                .map(
+                    (stat) =>
+                        stat.getMultipliedValue() *
+                        (critMultipliers[stat.fightProp] || 0)
+                )
+                .reduce((a, b) => a + b);
+        }
 
         // round crit value to 3 decimal places, the reason i am storing this separately is because this is how i eventually want to sort builds by.
         // const roundedCritValue = parseFloat(critValue.toFixed(3));
@@ -146,7 +192,7 @@ app.get("/u/:uid", async (req, res) => {
             weapon,
             constellation,
             artifacts,
-            // talents,
+            talents,
             critValue,
         };
     });
@@ -158,6 +204,20 @@ app.get("/u/:uid", async (req, res) => {
     // };
 
     res.json(data);
+
+    // write to json file
+    // fs.writeFile(
+    //     `user_${uid.uid}.json`,
+    //     JSON.stringify(data, null, 2),
+    //     (err) => {
+    //         if (err) {
+    //             console.error("error writing file:", err);
+    //             return;
+    //         }
+    //         console.log("file written successfully");
+    //         res.send(`User data saved to user_${uid.uid}.json`);
+    //     }
+    // );
 });
 
 app.listen(port, () => {
