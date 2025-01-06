@@ -4,15 +4,14 @@ import { enka } from "./index";
 const db = new sqlite3.Database("cinder.db");
 
 /**
- * Initializes the database by creating the `characters` table if it does not exist,
- * and populates it with character data from the `enka` source.
- *
- * The function performs the following steps:
- * 1. Creates the `characters` table with columns `id`, `c_id`, and `name`.
- * 2. Retrieves all characters from the `enka` source.
- * 3. For each character, checks if the character's name already exists in the `characters` table.
- * 4. If the character's name does not exist in the table, inserts the character into the table.
- *
+ * Initializes the database by creating necessary tables if they don't exist
+ * and populating the characters table with data from the Enka API.
+ * Tables created:
+ * - characters: Stores character information (id, name, rarity, element, class)
+ * - weapons: Stores weapon information (id, name, rarity, class)
+ * - artifacts: Stores artifact information (id, name, rarity, type, set)
+ * - users: Stores user information (id, nickname)
+ * - builds: Stores character builds with relationships to other tables
  */
 export function dbInit() {
     db.serialize(() => {
@@ -26,6 +25,32 @@ export function dbInit() {
 
         db.run(
             "CREATE TABLE IF NOT EXISTS artifacts (id INTEGER PRIMARY KEY AUTOINCREMENT, a_id INTEGER, name TEXT, rarity INTEGER, a_type TEXT, a_set TEXT)"
+        );
+
+        db.run(
+            "CREATE TABLE IF NOT EXISTS users (u_id INTEGER PRIMARY KEY, nickname TEXT)"
+        );
+
+        db.run(
+            `CREATE TABLE IF NOT EXISTS builds (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                u_id INTEGER,
+                c_id INTEGER,
+                w_id INTEGER,
+                a_id1_flower INTEGER,
+                a_id2_feather INTEGER,
+                a_id3_sands INTEGER,
+                a_id4_goblet INTEGER,
+                a_id5_circlet INTEGER,
+                FOREIGN KEY (u_id) REFERENCES users(u_id),
+                FOREIGN KEY (c_id) REFERENCES characters(c_id),
+                FOREIGN KEY (w_id) REFERENCES weapons(w_id),
+                FOREIGN KEY (a_id1_flower) REFERENCES artifacts(a_id),
+                FOREIGN KEY (a_id2_feather) REFERENCES artifacts(a_id),
+                FOREIGN KEY (a_id3_sands) REFERENCES artifacts(a_id),
+                FOREIGN KEY (a_id4_goblet) REFERENCES artifacts(a_id),
+                FOREIGN KEY (a_id5_circlet) REFERENCES artifacts(a_id)
+            )`
         );
 
         const character = enka.getAllCharacters();
@@ -152,6 +177,41 @@ export function dbInsertArtifact(
             rarity,
             a_type,
             a_set
+        );
+    });
+}
+
+export function dbInsertUser(u_id: number, nickname: string) {
+    db.serialize(() => {
+        db.run(
+            "INSERT INTO users (u_id, nickname) VALUES (?, ?)",
+            u_id,
+            nickname
+        );
+    });
+}
+
+export function dbInsertBuild(
+    u_id: number,
+    c_id: number,
+    w_id: number,
+    a_id1_flower: number,
+    a_id2_feather: number,
+    a_id3_sands: number,
+    a_id4_goblet: number,
+    a_id5_circlet: number
+) {
+    db.serialize(() => {
+        db.run(
+            "INSERT INTO builds (u_id, c_id, w_id, a_id1_flower, a_id2_feather, a_id3_sands, a_id4_goblet, a_id5_circlet) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            u_id,
+            c_id,
+            w_id,
+            a_id1_flower,
+            a_id2_feather,
+            a_id3_sands,
+            a_id4_goblet,
+            a_id5_circlet
         );
     });
 }
