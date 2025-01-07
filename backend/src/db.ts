@@ -3,6 +3,9 @@ import { enka } from "./index";
 
 const db = new sqlite3.Database("cinder.db");
 
+const placeholder_url =
+    "https://static.wikia.nocookie.net/gensin-impact/images/8/84/Unknown_Icon.png/revision/latest?cb=20220509204455";
+
 /**
  * Initializes the database by creating necessary tables if they don't exist
  * and populating the characters table with data from the Enka API.
@@ -16,15 +19,15 @@ const db = new sqlite3.Database("cinder.db");
 export function dbInit() {
     db.serialize(() => {
         db.run(
-            "CREATE TABLE IF NOT EXISTS characters (id INTEGER PRIMARY KEY AUTOINCREMENT, c_id INTEGER, name TEXT, rarity INTEGER, element TEXT, c_class TEXT)"
+            "CREATE TABLE IF NOT EXISTS characters (id INTEGER PRIMARY KEY AUTOINCREMENT, c_id INTEGER, name TEXT, icon_url TEXT, rarity INTEGER, element TEXT, c_class TEXT)"
         );
 
         db.run(
-            "CREATE TABLE IF NOT EXISTS weapons (id INTEGER PRIMARY KEY AUTOINCREMENT, w_id INTEGER, name TEXT, rarity INTEGER, w_class TEXT)"
+            "CREATE TABLE IF NOT EXISTS weapons (id INTEGER PRIMARY KEY AUTOINCREMENT, w_id INTEGER, name TEXT, icon_url TEXT, rarity INTEGER, w_class TEXT)"
         );
 
         db.run(
-            "CREATE TABLE IF NOT EXISTS artifacts (id INTEGER PRIMARY KEY AUTOINCREMENT, a_id INTEGER, name TEXT, rarity INTEGER, a_type TEXT, a_set TEXT)"
+            "CREATE TABLE IF NOT EXISTS artifacts (id INTEGER PRIMARY KEY AUTOINCREMENT, a_id INTEGER, name TEXT, icon_url TEXT, rarity INTEGER, a_type TEXT, a_set TEXT)"
         );
 
         db.run(
@@ -68,6 +71,7 @@ export function dbInit() {
                             dbInsertCharacter(
                                 c.id,
                                 c.name.get(),
+                                c.icon.url || placeholder_url,
                                 c.stars,
                                 c.element.toString(),
                                 c.weaponType
@@ -92,6 +96,7 @@ export function dbInit() {
                         dbInsertWeapon(
                             w.id,
                             w.name.get(),
+                            w.icon.url || placeholder_url,
                             w.stars,
                             w.weaponType
                         );
@@ -114,6 +119,7 @@ export function dbInit() {
                         dbInsertArtifact(
                             a.id,
                             a.name.get(),
+                            a.icon.url || placeholder_url,
                             a.stars,
                             a.equipType,
                             a.set.name.get()
@@ -128,16 +134,18 @@ export function dbInit() {
 export function dbInsertCharacter(
     c_id: number,
     name: string,
+    icon_url: string,
     rarity: number,
     element: string,
     c_class: string
 ) {
-    console.log(name);
+    console.log(name, icon_url);
     db.serialize(() => {
         db.run(
-            "INSERT INTO characters (c_id, name, rarity, element, c_class) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO characters (c_id, name, icon_url, rarity, element, c_class) VALUES (?, ?, ?, ?, ?, ?)",
             c_id,
             name,
+            icon_url,
             rarity,
             element,
             c_class
@@ -148,14 +156,16 @@ export function dbInsertCharacter(
 export function dbInsertWeapon(
     w_id: number,
     name: string,
+    icon_url: string,
     rarity: number,
     w_class: string
 ) {
     db.serialize(() => {
         db.run(
-            "INSERT INTO weapons (w_id, name, rarity, w_class) VALUES (?, ?, ?, ?)",
+            "INSERT INTO weapons (w_id, name, icon_url, rarity, w_class) VALUES (?, ?, ?, ?, ?)",
             w_id,
             name,
+            icon_url,
             rarity,
             w_class
         );
@@ -165,15 +175,17 @@ export function dbInsertWeapon(
 export function dbInsertArtifact(
     a_id: number,
     name: string,
+    icon_url: string,
     rarity: number,
     a_type: string,
     a_set: string
 ) {
     db.serialize(() => {
         db.run(
-            "INSERT INTO artifacts (a_id, name, rarity, a_type, a_set) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO artifacts (a_id, name, icon_url, rarity, a_type, a_set) VALUES (?, ?, ?, ?, ?, ?)",
             a_id,
             name,
+            icon_url,
             rarity,
             a_type,
             a_set

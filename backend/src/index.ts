@@ -2,6 +2,7 @@ import express from "express";
 import { EnkaClient, ArtifactSet } from "enka-network-api";
 import fs from "fs";
 import { dbInit } from "./db";
+import sqlite3 from "sqlite3";
 
 export const enka = new EnkaClient({ showFetchCacheLog: true }); // showFetchCacheLog is true by default
 
