@@ -1,5 +1,6 @@
 import sqlite3 from "sqlite3";
 import { enka } from "./index";
+import { Build, Artifact } from "./types";
 
 const db = new sqlite3.Database("cinder.db");
 
@@ -35,24 +36,44 @@ export function dbInit() {
         );
 
         db.run(
-            `CREATE TABLE IF NOT EXISTS builds (
+            `CREATE TABLE IF NOT EXISTS user_artifacts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                u_id INTEGER,
+                a_id INTEGER,
+                mainstat_prop TEXT,
+                mainstat_value REAL,
+                substat1_prop TEXT,
+                substat1_value REAL,
+                substat2_prop TEXT,
+                substat2_value REAL,
+                substat3_prop TEXT,
+                substat3_value REAL,
+                substat4_prop TEXT,
+                substat4_value REAL,
+                FOREIGN KEY (u_id) REFERENCES users(u_id),
+                FOREIGN KEY (a_id) REFERENCES artifacts(a_id)
+            )`
+        );
+
+        db.run(
+            `CREATE TABLE IF NOT EXISTS user_builds (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 u_id INTEGER,
                 c_id INTEGER,
                 w_id INTEGER,
-                a_id1_flower INTEGER,
-                a_id2_feather INTEGER,
-                a_id3_sands INTEGER,
-                a_id4_goblet INTEGER,
-                a_id5_circlet INTEGER,
+                a1_flower INTEGER,
+                a2_feather INTEGER,
+                a3_sands INTEGER,
+                a4_goblet INTEGER,
+                a5_circlet INTEGER,
                 FOREIGN KEY (u_id) REFERENCES users(u_id),
                 FOREIGN KEY (c_id) REFERENCES characters(c_id),
                 FOREIGN KEY (w_id) REFERENCES weapons(w_id),
-                FOREIGN KEY (a_id1_flower) REFERENCES artifacts(a_id),
-                FOREIGN KEY (a_id2_feather) REFERENCES artifacts(a_id),
-                FOREIGN KEY (a_id3_sands) REFERENCES artifacts(a_id),
-                FOREIGN KEY (a_id4_goblet) REFERENCES artifacts(a_id),
-                FOREIGN KEY (a_id5_circlet) REFERENCES artifacts(a_id)
+                FOREIGN KEY (a1_flower) REFERENCES user_artifacts(id),
+                FOREIGN KEY (a2_feather) REFERENCES user_artifacts(id),
+                FOREIGN KEY (a3_sands) REFERENCES user_artifacts(id),
+                FOREIGN KEY (a4_goblet) REFERENCES user_artifacts(id),
+                FOREIGN KEY (a5_circlet) REFERENCES user_artifacts(id)
             )`
         );
 
@@ -203,27 +224,65 @@ export function dbInsertUser(u_id: number, nickname: string) {
     });
 }
 
-export function dbInsertBuild(
-    u_id: number,
-    c_id: number,
-    w_id: number,
-    a_id1_flower: number,
-    a_id2_feather: number,
-    a_id3_sands: number,
-    a_id4_goblet: number,
-    a_id5_circlet: number
-) {
+export function dbInsertUserBuild(build: Build) {
+    //console.log(JSON.stringify(build.w_id));
     db.serialize(() => {
         db.run(
-            "INSERT INTO builds (u_id, c_id, w_id, a_id1_flower, a_id2_feather, a_id3_sands, a_id4_goblet, a_id5_circlet) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            u_id,
-            c_id,
-            w_id,
-            a_id1_flower,
-            a_id2_feather,
-            a_id3_sands,
-            a_id4_goblet,
-            a_id5_circlet
+            "INSERT INTO user_builds (u_id, c_id, w_id, a1_flower, a2_feather, a3_sands, a4_goblet, a5_circlet) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            build.u_id,
+            build.c_id,
+            build.w_id,
+            build.a1_flower,
+            build.a2_feather,
+            build.a3_sands,
+            build.a4_goblet,
+            build.a5_circlet
         );
+    });
+}
+
+export function dbInsertUserArtifact(artifact: Artifact): Promise<number> {
+    return new Promise((resolve, reject) => {
+        db.serialize(() => {
+            db.run(
+                `INSERT INTO user_artifacts (
+                    u_id,
+                    a_id,
+                    mainstat_prop,
+                    mainstat_value,
+                    substat1_prop,
+                    substat1_value,
+                    substat2_prop,
+                    substat2_value,
+                    substat3_prop,
+                    substat3_value,
+                    substat4_prop,
+                    substat4_value
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [
+                    artifact.u_id,
+                    artifact.a_id,
+                    artifact.mainstat.prop,
+                    artifact.mainstat.value,
+                    artifact.substats[0]?.prop || null,
+                    artifact.substats[0]?.value || null,
+                    artifact.substats[1]?.prop || null,
+                    artifact.substats[1]?.value || null,
+                    artifact.substats[2]?.prop || null,
+                    artifact.substats[2]?.value || null,
+                    artifact.substats[3]?.prop || null,
+                    artifact.substats[3]?.value || null,
+                ],
+
+                // return last inserted user_artifact id (should be the one that this function just inserted)
+                function (err) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(this.lastID);
+                    }
+                }
+            );
+        });
     });
 }

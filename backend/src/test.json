@@ -1,0 +1,2040 @@
+[
+    {
+        "attributes": {
+            "c_id": 10000089,
+            "name": "Furina",
+            "level": 90,
+            "maxLevel": 90,
+            "friendship": 10,
+            "statsList": [
+                " - Base HP: 15,307",
+                " - HP: 5,079",
+                " - HP: 127.6%",
+                " - Base ATK: 754",
+                " - ATK: 325",
+                " - ATK: 0.0%",
+                " - Base DEF: 696",
+                " - DEF: 39",
+                " - DEF: 5.8%",
+                " - Movement SPD: 0",
+                " - Movement SPD: 0.0%",
+                " - CRIT Rate: 65.0%",
+                " - CRIT DMG: 195.3%",
+                " - Energy Recharge: 172.5%",
+                " - Healing Bonus: 0.0%",
+                " - Incoming Healing Bonus: 0.0%",
+                " - Elemental Mastery: 68",
+                " - Physical RES: 0.0%",
+                " - Physical DMG Bonus: 0.0%",
+                " - Pyro DMG Bonus: 0.0%",
+                " - Electro DMG Bonus: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - Dendro DMG Bonus: 0.0%",
+                " - Anemo DMG Bonus: 0.0%",
+                " - Geo DMG Bonus: 0.0%",
+                " - Cryo DMG Bonus: 0.0%",
+                " - Pyro RES: 0.0%",
+                " - Electro RES: 0.0%",
+                " - Hydro RES: 0.0%",
+                " - Dendro RES: 0.0%",
+                " - Anemo RES: 0.0%",
+                " - Geo RES: 0.0%",
+                " - Cryo RES: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - CD Reduction: 0.0%",
+                " - Shield Strength: 0.0%",
+                " - HP: 20,269",
+                " - Max HP: 39,915",
+                " - ATK: 1,078",
+                " - DEF: 775",
+                " - Movement SPD: 0"
+            ]
+        },
+        "weapon": {
+            "w_id": 11413,
+            "name": "Festering Desire",
+            "refinementRank": 5,
+            "level": 90,
+            "maxLevel": 90,
+            "weaponStats": [
+                { "prop": "Base ATK", "value": 509.605949 },
+                { "prop": "Energy Recharge", "value": 0.4594 }
+            ]
+        },
+        "constellation": 0,
+        "artifacts": [
+            {
+                "a_id": 32543,
+                "mainstat": { "prop": "HP", "value": 4780 },
+                "substats": [
+                    { "prop": "HP", "value": 0.0466 },
+                    { "prop": "Energy Recharge", "value": 0.1036 },
+                    { "prop": "CRIT DMG", "value": 0.2642 },
+                    { "prop": "CRIT Rate", "value": 0.0311 }
+                ],
+                "activeBonuses": [
+                    { "description": "Increases Elemental Skill DMG by 20%." },
+                    {
+                        "description": "Increases Elemental Skill DMG by 25%. Additionally, when not on the field, Elemental Skill DMG will be further increased by 25%. This effect will be cleared 2s after taking the field."
+                    }
+                ]
+            },
+            {
+                "a_id": 32524,
+                "mainstat": { "prop": "ATK", "value": 311 },
+                "substats": [
+                    { "prop": "Energy Recharge", "value": 0.0583 },
+                    { "prop": "CRIT DMG", "value": 0.1399 },
+                    { "prop": "HP", "value": 0.1515 },
+                    { "prop": "CRIT Rate", "value": 0.1167 }
+                ],
+                "activeBonuses": [
+                    { "description": "Increases Elemental Skill DMG by 20%." },
+                    {
+                        "description": "Increases Elemental Skill DMG by 25%. Additionally, when not on the field, Elemental Skill DMG will be further increased by 25%. This effect will be cleared 2s after taking the field."
+                    }
+                ]
+            },
+            {
+                "a_id": 32554,
+                "mainstat": { "prop": "HP", "value": 0.466 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.1011 },
+                    { "prop": "HP", "value": 298.75 },
+                    { "prop": "CRIT DMG", "value": 0.1398 },
+                    { "prop": "Elemental Mastery", "value": 67.6 }
+                ],
+                "activeBonuses": [
+                    { "description": "Increases Elemental Skill DMG by 20%." },
+                    {
+                        "description": "Increases Elemental Skill DMG by 25%. Additionally, when not on the field, Elemental Skill DMG will be further increased by 25%. This effect will be cleared 2s after taking the field."
+                    }
+                ]
+            },
+            {
+                "a_id": 31514,
+                "mainstat": { "prop": "HP", "value": 0.466 },
+                "substats": [
+                    { "prop": "Energy Recharge", "value": 0.1036 },
+                    { "prop": "DEF", "value": 0.0583 },
+                    { "prop": "CRIT Rate", "value": 0.0661 },
+                    { "prop": "CRIT DMG", "value": 0.2875 }
+                ],
+                "activeBonuses": [
+                    { "description": "Increases Elemental Skill DMG by 20%." },
+                    {
+                        "description": "Increases Elemental Skill DMG by 25%. Additionally, when not on the field, Elemental Skill DMG will be further increased by 25%. This effect will be cleared 2s after taking the field."
+                    }
+                ]
+            },
+            {
+                "a_id": 32534,
+                "mainstat": { "prop": "CRIT DMG", "value": 0.622 },
+                "substats": [
+                    { "prop": "ATK", "value": 13.62 },
+                    { "prop": "HP", "value": 0.1457 },
+                    { "prop": "CRIT Rate", "value": 0.0933 },
+                    { "prop": "DEF", "value": 39.35 }
+                ],
+                "activeBonuses": [
+                    { "description": "Increases Elemental Skill DMG by 20%." },
+                    {
+                        "description": "Increases Elemental Skill DMG by 25%. Additionally, when not on the field, Elemental Skill DMG will be further increased by 25%. This effect will be cleared 2s after taking the field."
+                    }
+                ]
+            }
+        ],
+        "talents": {
+            "skillLevels": [
+                {
+                    "name": "Normal Attack: Soloist's Solicitation",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "Salon Solitaire",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "Let the People Rejoice",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                }
+            ],
+            "unlockedPassiveTalents": [
+                { "name": "Endless Waltz" },
+                { "name": "Unheard Confession" },
+                { "name": "The Sea Is My Stage" }
+            ]
+        },
+        "critValue": 226.99999999999997
+    },
+    {
+        "attributes": {
+            "c_id": 10000046,
+            "name": "Hu Tao",
+            "level": 90,
+            "maxLevel": 90,
+            "friendship": 10,
+            "statsList": [
+                " - Base HP: 15,552",
+                " - HP: 4,780",
+                " - HP: 39.8%",
+                " - Base ATK: 715",
+                " - ATK: 342",
+                " - ATK: 15.7%",
+                " - Base DEF: 876",
+                " - DEF: 53",
+                " - DEF: 0.0%",
+                " - Movement SPD: 0",
+                " - Movement SPD: 0.0%",
+                " - CRIT Rate: 52.4%",
+                " - CRIT DMG: 278.9%",
+                " - Energy Recharge: 111.0%",
+                " - Healing Bonus: 0.0%",
+                " - Incoming Healing Bonus: 0.0%",
+                " - Elemental Mastery: 277",
+                " - Physical RES: 0.0%",
+                " - Physical DMG Bonus: 0.0%",
+                " - Pyro DMG Bonus: 46.6%",
+                " - Electro DMG Bonus: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - Dendro DMG Bonus: 0.0%",
+                " - Anemo DMG Bonus: 0.0%",
+                " - Geo DMG Bonus: 0.0%",
+                " - Cryo DMG Bonus: 0.0%",
+                " - Pyro RES: 0.0%",
+                " - Electro RES: 0.0%",
+                " - Hydro RES: 0.0%",
+                " - Dendro RES: 0.0%",
+                " - Anemo RES: 0.0%",
+                " - Geo RES: 0.0%",
+                " - Cryo RES: 0.0%",
+                " - Pyro DMG Bonus: 46.6%",
+                " - CD Reduction: 0.0%",
+                " - Shield Strength: 0.0%",
+                " - HP: 25,176",
+                " - Max HP: 26,525",
+                " - ATK: 1,381",
+                " - DEF: 929",
+                " - Movement SPD: 0"
+            ]
+        },
+        "weapon": {
+            "w_id": 13501,
+            "name": "Staff of Homa",
+            "refinementRank": 1,
+            "level": 90,
+            "maxLevel": 90,
+            "weaponStats": [
+                { "prop": "Base ATK", "value": 608.0745972 },
+                { "prop": "CRIT DMG", "value": 0.661536 }
+            ]
+        },
+        "constellation": 1,
+        "artifacts": [
+            {
+                "a_id": 31544,
+                "mainstat": { "prop": "HP", "value": 4780 },
+                "substats": [
+                    { "prop": "ATK", "value": 31.12 },
+                    { "prop": "CRIT DMG", "value": 0.1399 },
+                    { "prop": "CRIT Rate", "value": 0.0622 },
+                    { "prop": "Elemental Mastery", "value": 55.95 }
+                ],
+                "activeBonuses": [
+                    { "description": "Normal and Charged Attack DMG +15%" },
+                    {
+                        "description": "When current HP increases or decreases, CRIT Rate will be increased by 12% for 5s. Max 3 stacks."
+                    }
+                ]
+            },
+            {
+                "a_id": 31523,
+                "mainstat": { "prop": "ATK", "value": 311 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.105 },
+                    { "prop": "HP", "value": 0.0466 },
+                    { "prop": "Elemental Mastery", "value": 34.97 },
+                    { "prop": "CRIT DMG", "value": 0.1321 }
+                ],
+                "activeBonuses": [
+                    { "description": "Normal and Charged Attack DMG +15%" },
+                    {
+                        "description": "When current HP increases or decreases, CRIT Rate will be increased by 12% for 5s. Max 3 stacks."
+                    }
+                ]
+            },
+            {
+                "a_id": 37554,
+                "mainstat": { "prop": "Elemental Mastery", "value": 186.5 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.1439 },
+                    { "prop": "CRIT DMG", "value": 0.2175 },
+                    { "prop": "DEF", "value": 20.83 },
+                    { "prop": "ATK", "value": 0.0583 }
+                ],
+                "activeBonuses": [
+                    { "description": "Normal and Charged Attack DMG +15%" },
+                    {
+                        "description": "When current HP increases or decreases, CRIT Rate will be increased by 12% for 5s. Max 3 stacks."
+                    }
+                ]
+            },
+            {
+                "a_id": 31513,
+                "mainstat": { "prop": "Pyro DMG Bonus", "value": 0.466 },
+                "substats": [
+                    { "prop": "CRIT DMG", "value": 0.1321 },
+                    { "prop": "HP", "value": 0.0991 },
+                    { "prop": "CRIT Rate", "value": 0.0622 },
+                    { "prop": "Energy Recharge", "value": 0.1101 }
+                ],
+                "activeBonuses": [
+                    { "description": "Normal and Charged Attack DMG +15%" },
+                    {
+                        "description": "When current HP increases or decreases, CRIT Rate will be increased by 12% for 5s. Max 3 stacks."
+                    }
+                ]
+            },
+            {
+                "a_id": 31533,
+                "mainstat": { "prop": "CRIT DMG", "value": 0.622 },
+                "substats": [
+                    { "prop": "ATK", "value": 0.0991 },
+                    { "prop": "CRIT Rate", "value": 0.1011 },
+                    { "prop": "DEF", "value": 32.4 },
+                    { "prop": "HP", "value": 0.0525 }
+                ],
+                "activeBonuses": [
+                    { "description": "Normal and Charged Attack DMG +15%" },
+                    {
+                        "description": "When current HP increases or decreases, CRIT Rate will be increased by 12% for 5s. Max 3 stacks."
+                    }
+                ]
+            }
+        ],
+        "talents": {
+            "skillLevels": [
+                {
+                    "name": "Normal Attack: Secret Spear of Wangsheng",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "Guide to Afterlife",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "Spirit Soother",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                }
+            ],
+            "unlockedPassiveTalents": [
+                { "name": "Flutter By" },
+                { "name": "Sanguine Rouge" },
+                { "name": "The More the Merrier" }
+            ]
+        },
+        "critValue": 219.24
+    },
+    {
+        "attributes": {
+            "c_id": 10000022,
+            "name": "Venti",
+            "level": 90,
+            "maxLevel": 90,
+            "friendship": 10,
+            "statsList": [
+                " - Base HP: 10,531",
+                " - HP: 4,780",
+                " - HP: 0.0%",
+                " - Base ATK: 773",
+                " - ATK: 346",
+                " - ATK: 50.7%",
+                " - Base DEF: 669",
+                " - DEF: 113",
+                " - DEF: 32.1%",
+                " - Movement SPD: 0",
+                " - Movement SPD: 0.0%",
+                " - CRIT Rate: 31.4%",
+                " - CRIT DMG: 57.8%",
+                " - Energy Recharge: 170.2%",
+                " - Healing Bonus: 0.0%",
+                " - Incoming Healing Bonus: 0.0%",
+                " - Elemental Mastery: 844",
+                " - Physical RES: 0.0%",
+                " - Physical DMG Bonus: 0.0%",
+                " - Pyro DMG Bonus: 0.0%",
+                " - Electro DMG Bonus: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - Dendro DMG Bonus: 0.0%",
+                " - Anemo DMG Bonus: 15.0%",
+                " - Geo DMG Bonus: 0.0%",
+                " - Cryo DMG Bonus: 0.0%",
+                " - Pyro RES: 0.0%",
+                " - Electro RES: 0.0%",
+                " - Hydro RES: 0.0%",
+                " - Dendro RES: 0.0%",
+                " - Anemo RES: 0.0%",
+                " - Geo RES: 0.0%",
+                " - Cryo RES: 0.0%",
+                " - Anemo DMG Bonus: 15.0%",
+                " - CD Reduction: 0.0%",
+                " - Shield Strength: 0.0%",
+                " - HP: 15,311",
+                " - Max HP: 15,311",
+                " - ATK: 1,511",
+                " - DEF: 996",
+                " - Movement SPD: 0"
+            ]
+        },
+        "weapon": {
+            "w_id": 15402,
+            "name": "The Stringless",
+            "refinementRank": 5,
+            "level": 90,
+            "maxLevel": 90,
+            "weaponStats": [
+                { "prop": "Base ATK", "value": 509.605949 },
+                { "prop": "Elemental Mastery", "value": 165.384 }
+            ]
+        },
+        "constellation": 0,
+        "artifacts": [
+            {
+                "a_id": 76544,
+                "mainstat": { "prop": "HP", "value": 4780 },
+                "substats": [
+                    { "prop": "Energy Recharge", "value": 0.0648 },
+                    { "prop": "ATK", "value": 0.1516 },
+                    { "prop": "Elemental Mastery", "value": 60.61 },
+                    { "prop": "CRIT Rate", "value": 0.0622 }
+                ],
+                "activeBonuses": [
+                    { "description": "Anemo DMG Bonus +15%" },
+                    {
+                        "description": "Increases Swirl DMG by 60%. Decreases opponent's Elemental RES to the element infused in the Swirl by 40% for 10s."
+                    }
+                ]
+            },
+            {
+                "a_id": 76524,
+                "mainstat": { "prop": "ATK", "value": 311 },
+                "substats": [
+                    { "prop": "DEF", "value": 20.83 },
+                    { "prop": "Elemental Mastery", "value": 58.28 },
+                    { "prop": "Energy Recharge", "value": 0.1231 },
+                    { "prop": "DEF", "value": 0.2041 }
+                ],
+                "activeBonuses": [
+                    { "description": "Anemo DMG Bonus +15%" },
+                    {
+                        "description": "Increases Swirl DMG by 60%. Decreases opponent's Elemental RES to the element infused in the Swirl by 40% for 10s."
+                    }
+                ]
+            },
+            {
+                "a_id": 76553,
+                "mainstat": { "prop": "Elemental Mastery", "value": 186.5 },
+                "substats": [
+                    { "prop": "DEF", "value": 0.1166 },
+                    { "prop": "ATK", "value": 0.1574 },
+                    { "prop": "ATK", "value": 35.02 },
+                    { "prop": "DEF", "value": 16.2 }
+                ],
+                "activeBonuses": [
+                    { "description": "Anemo DMG Bonus +15%" },
+                    {
+                        "description": "Increases Swirl DMG by 60%. Decreases opponent's Elemental RES to the element infused in the Swirl by 40% for 10s."
+                    }
+                ]
+            },
+            {
+                "a_id": 80514,
+                "mainstat": { "prop": "Elemental Mastery", "value": 186.5 },
+                "substats": [
+                    { "prop": "ATK", "value": 0.1458 },
+                    { "prop": "CRIT Rate", "value": 0.0661 },
+                    { "prop": "DEF", "value": 16.2 },
+                    { "prop": "Energy Recharge", "value": 0.1944 }
+                ],
+                "activeBonuses": [
+                    { "description": "Anemo DMG Bonus +15%" },
+                    {
+                        "description": "Increases Swirl DMG by 60%. Decreases opponent's Elemental RES to the element infused in the Swirl by 40% for 10s."
+                    }
+                ]
+            },
+            {
+                "a_id": 76534,
+                "mainstat": { "prop": "Elemental Mastery", "value": 186.5 },
+                "substats": [
+                    { "prop": "ATK", "value": 0.0525 },
+                    { "prop": "DEF", "value": 60.18 },
+                    { "prop": "CRIT DMG", "value": 0.0777 },
+                    { "prop": "CRIT Rate", "value": 0.1361 }
+                ],
+                "activeBonuses": [
+                    { "description": "Anemo DMG Bonus +15%" },
+                    {
+                        "description": "Increases Swirl DMG by 60%. Decreases opponent's Elemental RES to the element infused in the Swirl by 40% for 10s."
+                    }
+                ]
+            }
+        ],
+        "talents": {
+            "skillLevels": [
+                {
+                    "name": "Normal Attack: Divine Marksmanship",
+                    "level": { "base": 6, "extra": 0, "value": 6 }
+                },
+                {
+                    "name": "Skyward Sonnet",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "Wind's Grand Ode",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                }
+            ],
+            "unlockedPassiveTalents": [
+                { "name": "Embrace of Winds" },
+                { "name": "Stormeye" },
+                { "name": "Windrider" }
+            ]
+        },
+        "critValue": 60.65
+    },
+    {
+        "attributes": {
+            "c_id": 10000094,
+            "name": "Chiori",
+            "level": 90,
+            "maxLevel": 90,
+            "friendship": 10,
+            "statsList": [
+                " - Base HP: 11,438",
+                " - HP: 5,079",
+                " - HP: 4.1%",
+                " - Base ATK: 865",
+                " - ATK: 420",
+                " - ATK: 5.3%",
+                " - Base DEF: 953",
+                " - DEF: 42",
+                " - DEF: 126.5%",
+                " - Movement SPD: 0",
+                " - Movement SPD: 0.0%",
+                " - CRIT Rate: 88.0%",
+                " - CRIT DMG: 248.6%",
+                " - Energy Recharge: 100.0%",
+                " - Healing Bonus: 0.0%",
+                " - Incoming Healing Bonus: 0.0%",
+                " - Elemental Mastery: 37",
+                " - Physical RES: 0.0%",
+                " - Physical DMG Bonus: 0.0%",
+                " - Pyro DMG Bonus: 0.0%",
+                " - Electro DMG Bonus: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - Dendro DMG Bonus: 0.0%",
+                " - Anemo DMG Bonus: 0.0%",
+                " - Geo DMG Bonus: 46.6%",
+                " - Cryo DMG Bonus: 0.0%",
+                " - Pyro RES: 0.0%",
+                " - Electro RES: 0.0%",
+                " - Hydro RES: 0.0%",
+                " - Dendro RES: 0.0%",
+                " - Anemo RES: 0.0%",
+                " - Geo RES: 0.0%",
+                " - Cryo RES: 0.0%",
+                " - Geo DMG Bonus: 46.6%",
+                " - CD Reduction: 0.0%",
+                " - Shield Strength: 0.0%",
+                " - HP: 16,983",
+                " - Max HP: 16,983",
+                " - ATK: 1,330",
+                " - DEF: 2,200",
+                " - Movement SPD: 0"
+            ]
+        },
+        "weapon": {
+            "w_id": 11514,
+            "name": "Uraku Misugiri",
+            "refinementRank": 1,
+            "level": 90,
+            "maxLevel": 90,
+            "weaponStats": [
+                { "prop": "Base ATK", "value": 541.829758 },
+                { "prop": "CRIT DMG", "value": 0.882048 }
+            ]
+        },
+        "constellation": 0,
+        "artifacts": [
+            {
+                "a_id": 95544,
+                "mainstat": { "prop": "HP", "value": 4780 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.1244 },
+                    { "prop": "CRIT DMG", "value": 0.1866 },
+                    { "prop": "Elemental Mastery", "value": 20.98 },
+                    { "prop": "DEF", "value": 0.0729 }
+                ],
+                "activeBonuses": [
+                    { "description": "DEF +30%" },
+                    {
+                        "description": "A character equipped with this Artifact set will obtain the Curiosity effect in the following conditions: When on the field, the character gains 1 stack after hitting an opponent with a Geo attack, triggering a maximum of once every 0.3s. When off the field, the character gains 1 stack every 3s. Curiosity can stack up to 4 times, each providing 6% DEF and a 6% Geo DMG Bonus. When 6 seconds pass without gaining a Curiosity stack, 1 stack is lost."
+                    }
+                ]
+            },
+            {
+                "a_id": 95523,
+                "mainstat": { "prop": "ATK", "value": 311 },
+                "substats": [
+                    { "prop": "CRIT DMG", "value": 0.2098 },
+                    { "prop": "CRIT Rate", "value": 0.07 },
+                    { "prop": "HP", "value": 0.0408 },
+                    { "prop": "DEF", "value": 0.1093 }
+                ],
+                "activeBonuses": [
+                    { "description": "DEF +30%" },
+                    {
+                        "description": "A character equipped with this Artifact set will obtain the Curiosity effect in the following conditions: When on the field, the character gains 1 stack after hitting an opponent with a Geo attack, triggering a maximum of once every 0.3s. When off the field, the character gains 1 stack every 3s. Curiosity can stack up to 4 times, each providing 6% DEF and a 6% Geo DMG Bonus. When 6 seconds pass without gaining a Curiosity stack, 1 stack is lost."
+                    }
+                ]
+            },
+            {
+                "a_id": 95554,
+                "mainstat": { "prop": "DEF", "value": 0.583 },
+                "substats": [
+                    { "prop": "Elemental Mastery", "value": 16.32 },
+                    { "prop": "CRIT Rate", "value": 0.035 },
+                    { "prop": "ATK", "value": 62.25 },
+                    { "prop": "CRIT DMG", "value": 0.2253 }
+                ],
+                "activeBonuses": [
+                    { "description": "DEF +30%" },
+                    {
+                        "description": "A character equipped with this Artifact set will obtain the Curiosity effect in the following conditions: When on the field, the character gains 1 stack after hitting an opponent with a Geo attack, triggering a maximum of once every 0.3s. When off the field, the character gains 1 stack every 3s. Curiosity can stack up to 4 times, each providing 6% DEF and a 6% Geo DMG Bonus. When 6 seconds pass without gaining a Curiosity stack, 1 stack is lost."
+                    }
+                ]
+            },
+            {
+                "a_id": 95513,
+                "mainstat": { "prop": "Geo DMG Bonus", "value": 0.466 },
+                "substats": [
+                    { "prop": "ATK", "value": 29.18 },
+                    { "prop": "CRIT DMG", "value": 0.1399 },
+                    { "prop": "HP", "value": 298.75 },
+                    { "prop": "CRIT Rate", "value": 0.0972 }
+                ],
+                "activeBonuses": [
+                    { "description": "DEF +30%" },
+                    {
+                        "description": "A character equipped with this Artifact set will obtain the Curiosity effect in the following conditions: When on the field, the character gains 1 stack after hitting an opponent with a Geo attack, triggering a maximum of once every 0.3s. When off the field, the character gains 1 stack every 3s. Curiosity can stack up to 4 times, each providing 6% DEF and a 6% Geo DMG Bonus. When 6 seconds pass without gaining a Curiosity stack, 1 stack is lost."
+                    }
+                ]
+            },
+            {
+                "a_id": 90534,
+                "mainstat": { "prop": "CRIT Rate", "value": 0.311 },
+                "substats": [
+                    { "prop": "ATK", "value": 17.51 },
+                    { "prop": "DEF", "value": 41.66 },
+                    { "prop": "ATK", "value": 0.0525 },
+                    { "prop": "CRIT DMG", "value": 0.3419 }
+                ],
+                "activeBonuses": [
+                    { "description": "DEF +30%" },
+                    {
+                        "description": "A character equipped with this Artifact set will obtain the Curiosity effect in the following conditions: When on the field, the character gains 1 stack after hitting an opponent with a Geo attack, triggering a maximum of once every 0.3s. When off the field, the character gains 1 stack every 3s. Curiosity can stack up to 4 times, each providing 6% DEF and a 6% Geo DMG Bonus. When 6 seconds pass without gaining a Curiosity stack, 1 stack is lost."
+                    }
+                ]
+            }
+        ],
+        "talents": {
+            "skillLevels": [
+                {
+                    "name": "Normal Attack: Weaving Blade",
+                    "level": { "base": 6, "extra": 0, "value": 6 }
+                },
+                {
+                    "name": "Fluttering Hasode",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "Hiyoku: Twin Blades",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                }
+            ],
+            "unlockedPassiveTalents": [
+                { "name": "Tailor-Made" },
+                { "name": "The Finishing Touch" },
+                { "name": "Brocaded Collar's Beauteous Silhouette" }
+            ]
+        },
+        "critValue": 237.87
+    },
+    {
+        "attributes": {
+            "c_id": 10000102,
+            "name": "Mualani",
+            "level": 90,
+            "maxLevel": 90,
+            "friendship": 10,
+            "statsList": [
+                " - Base HP: 15,185",
+                " - HP: 5,348",
+                " - HP: 77.1%",
+                " - Base ATK: 724",
+                " - ATK: 371",
+                " - ATK: 0.0%",
+                " - Base DEF: 570",
+                " - DEF: 35",
+                " - DEF: 0.0%",
+                " - Movement SPD: 0",
+                " - Movement SPD: 0.0%",
+                " - CRIT Rate: 53.0%",
+                " - CRIT DMG: 266.4%",
+                " - Energy Recharge: 105.2%",
+                " - Healing Bonus: 0.0%",
+                " - Incoming Healing Bonus: 0.0%",
+                " - Elemental Mastery: 233",
+                " - Physical RES: 0.0%",
+                " - Physical DMG Bonus: 0.0%",
+                " - Pyro DMG Bonus: 0.0%",
+                " - Electro DMG Bonus: 0.0%",
+                " - Hydro DMG Bonus: 46.6%",
+                " - Dendro DMG Bonus: 0.0%",
+                " - Anemo DMG Bonus: 0.0%",
+                " - Geo DMG Bonus: 0.0%",
+                " - Cryo DMG Bonus: 0.0%",
+                " - Pyro RES: 0.0%",
+                " - Electro RES: 0.0%",
+                " - Hydro RES: 0.0%",
+                " - Dendro RES: 0.0%",
+                " - Anemo RES: 0.0%",
+                " - Geo RES: 0.0%",
+                " - Cryo RES: 0.0%",
+                " - Hydro DMG Bonus: 46.6%",
+                " - CD Reduction: 0.0%",
+                " - Shield Strength: 0.0%",
+                " - HP: 31,719",
+                " - Max HP: 32,240",
+                " - ATK: 1,095",
+                " - DEF: 605",
+                " - Movement SPD: 0"
+            ]
+        },
+        "weapon": {
+            "w_id": 14516,
+            "name": "Surf's Up",
+            "refinementRank": 1,
+            "level": 90,
+            "maxLevel": 90,
+            "weaponStats": [
+                { "prop": "Base ATK", "value": 541.829758 },
+                { "prop": "CRIT DMG", "value": 0.882048 }
+            ]
+        },
+        "constellation": 0,
+        "artifacts": [
+            {
+                "a_id": 38543,
+                "mainstat": { "prop": "HP", "value": 4780 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.035 },
+                    { "prop": "CRIT DMG", "value": 0.202 },
+                    { "prop": "ATK", "value": 13.62 },
+                    { "prop": "Elemental Mastery", "value": 58.28 }
+                ],
+                "activeBonuses": [
+                    {
+                        "description": "While the equipping character is in Nightsoul's Blessing and is on the field, their DMG dealt is increased by 15%."
+                    },
+                    {
+                        "description": "After the equipping character consumes 1 Nightsoul point while on the field, CRIT Rate increases by 40% for 6s. This effect can trigger once every second."
+                    }
+                ]
+            },
+            {
+                "a_id": 38524,
+                "mainstat": { "prop": "ATK", "value": 311 },
+                "substats": [
+                    { "prop": "CRIT DMG", "value": 0.1321 },
+                    { "prop": "CRIT Rate", "value": 0.0894 },
+                    { "prop": "Elemental Mastery", "value": 46.62 },
+                    { "prop": "DEF", "value": 34.72 }
+                ],
+                "activeBonuses": [
+                    {
+                        "description": "While the equipping character is in Nightsoul's Blessing and is on the field, their DMG dealt is increased by 15%."
+                    },
+                    {
+                        "description": "After the equipping character consumes 1 Nightsoul point while on the field, CRIT Rate increases by 40% for 6s. This effect can trigger once every second."
+                    }
+                ]
+            },
+            {
+                "a_id": 38553,
+                "mainstat": { "prop": "HP", "value": 0.466 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.0894 },
+                    { "prop": "CRIT DMG", "value": 0.0777 },
+                    { "prop": "ATK", "value": 33.07 },
+                    { "prop": "Elemental Mastery", "value": 34.97 }
+                ],
+                "activeBonuses": [
+                    {
+                        "description": "While the equipping character is in Nightsoul's Blessing and is on the field, their DMG dealt is increased by 15%."
+                    },
+                    {
+                        "description": "After the equipping character consumes 1 Nightsoul point while on the field, CRIT Rate increases by 40% for 6s. This effect can trigger once every second."
+                    }
+                ]
+            },
+            {
+                "a_id": 38513,
+                "mainstat": { "prop": "Hydro DMG Bonus", "value": 0.466 },
+                "substats": [
+                    { "prop": "Energy Recharge", "value": 0.0518 },
+                    { "prop": "Elemental Mastery", "value": 32.64 },
+                    { "prop": "CRIT DMG", "value": 0.2486 },
+                    { "prop": "ATK", "value": 13.62 }
+                ],
+                "activeBonuses": [
+                    {
+                        "description": "While the equipping character is in Nightsoul's Blessing and is on the field, their DMG dealt is increased by 15%."
+                    },
+                    {
+                        "description": "After the equipping character consumes 1 Nightsoul point while on the field, CRIT Rate increases by 40% for 6s. This effect can trigger once every second."
+                    }
+                ]
+            },
+            {
+                "a_id": 92534,
+                "mainstat": { "prop": "CRIT DMG", "value": 0.622 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.0739 },
+                    { "prop": "HP", "value": 0.105 },
+                    { "prop": "HP", "value": 567.63 },
+                    { "prop": "Elemental Mastery", "value": 60.61 }
+                ],
+                "activeBonuses": [
+                    {
+                        "description": "While the equipping character is in Nightsoul's Blessing and is on the field, their DMG dealt is increased by 15%."
+                    },
+                    {
+                        "description": "After the equipping character consumes 1 Nightsoul point while on the field, CRIT Rate increases by 40% for 6s. This effect can trigger once every second."
+                    }
+                ]
+            }
+        ],
+        "talents": {
+            "skillLevels": [
+                {
+                    "name": "Normal Attack: Cooling Treatment",
+                    "level": { "base": 1, "extra": 0, "value": 1 }
+                },
+                {
+                    "name": "Surfshark Wavebreaker",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "Boomsharka-laka",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                }
+            ],
+            "unlockedPassiveTalents": [
+                { "name": "Heat-Resistant Freshwater Floater" },
+                { "name": "Natlan's Greatest Guide" },
+                { "name": "Night Realm's Gift: Crests and Troughs" },
+                { "name": "The Trick Is to Keep Smiling!" }
+            ]
+        },
+        "critValue": 185.78
+    },
+    {
+        "attributes": {
+            "c_id": 10000096,
+            "name": "Arlecchino",
+            "level": 90,
+            "maxLevel": 90,
+            "friendship": 10,
+            "statsList": [
+                " - Base HP: 13,103",
+                " - HP: 4,780",
+                " - HP: 5.3%",
+                " - Base ATK: 796",
+                " - ATK: 311",
+                " - ATK: 89.1%",
+                " - Base DEF: 765",
+                " - DEF: 79",
+                " - DEF: 21.1%",
+                " - Movement SPD: 0",
+                " - Movement SPD: 0.0%",
+                " - CRIT Rate: 88.0%",
+                " - CRIT DMG: 222.9%",
+                " - Energy Recharge: 112.3%",
+                " - Healing Bonus: 0.0%",
+                " - Incoming Healing Bonus: 0.0%",
+                " - Elemental Mastery: 84",
+                " - Physical RES: 0.0%",
+                " - Physical DMG Bonus: 0.0%",
+                " - Pyro DMG Bonus: 46.6%",
+                " - Electro DMG Bonus: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - Dendro DMG Bonus: 0.0%",
+                " - Anemo DMG Bonus: 0.0%",
+                " - Geo DMG Bonus: 0.0%",
+                " - Cryo DMG Bonus: 0.0%",
+                " - Pyro RES: 0.0%",
+                " - Electro RES: 0.0%",
+                " - Hydro RES: 0.0%",
+                " - Dendro RES: 0.0%",
+                " - Anemo RES: 0.0%",
+                " - Geo RES: 0.0%",
+                " - Cryo RES: 0.0%",
+                " - Pyro DMG Bonus: 46.6%",
+                " - CD Reduction: 0.0%",
+                " - Shield Strength: 0.0%",
+                " - HP: 7,007",
+                " - Max HP: 18,571",
+                " - ATK: 1,817",
+                " - DEF: 1,005",
+                " - Movement SPD: 0"
+            ]
+        },
+        "weapon": {
+            "w_id": 13405,
+            "name": "Deathmatch",
+            "refinementRank": 1,
+            "level": 90,
+            "maxLevel": 90,
+            "weaponStats": [
+                { "prop": "Base ATK", "value": 454.3631525 },
+                { "prop": "CRIT Rate", "value": 0.36752 }
+            ]
+        },
+        "constellation": 0,
+        "artifacts": [
+            {
+                "a_id": 75544,
+                "mainstat": { "prop": "HP", "value": 4780 },
+                "substats": [
+                    { "prop": "DEF", "value": 0.0656 },
+                    { "prop": "CRIT DMG", "value": 0.2097 },
+                    { "prop": "HP", "value": 0.0525 },
+                    { "prop": "CRIT Rate", "value": 0.1244 }
+                ],
+                "activeBonuses": [
+                    { "description": "ATK +18%." },
+                    {
+                        "description": "If the wielder of this artifact set uses a Sword, Claymore or Polearm, increases their Normal Attack DMG by 35%."
+                    }
+                ]
+            },
+            {
+                "a_id": 75524,
+                "mainstat": { "prop": "ATK", "value": 311 },
+                "substats": [
+                    { "prop": "ATK", "value": 0.0991 },
+                    { "prop": "DEF", "value": 20.83 },
+                    { "prop": "Energy Recharge", "value": 0.1231 },
+                    { "prop": "CRIT DMG", "value": 0.272 }
+                ],
+                "activeBonuses": [
+                    { "description": "ATK +18%." },
+                    {
+                        "description": "If the wielder of this artifact set uses a Sword, Claymore or Polearm, increases their Normal Attack DMG by 35%."
+                    }
+                ]
+            },
+            {
+                "a_id": 75554,
+                "mainstat": { "prop": "ATK", "value": 0.466 },
+                "substats": [
+                    { "prop": "DEF", "value": 23.15 },
+                    { "prop": "CRIT DMG", "value": 0.0622 },
+                    { "prop": "Elemental Mastery", "value": 41.96 },
+                    { "prop": "CRIT Rate", "value": 0.1594 }
+                ],
+                "activeBonuses": [
+                    { "description": "ATK +18%." },
+                    {
+                        "description": "If the wielder of this artifact set uses a Sword, Claymore or Polearm, increases their Normal Attack DMG by 35%."
+                    }
+                ]
+            },
+            {
+                "a_id": 21513,
+                "mainstat": { "prop": "Pyro DMG Bonus", "value": 0.466 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.0739 },
+                    { "prop": "CRIT DMG", "value": 0.1787 },
+                    { "prop": "DEF", "value": 34.72 },
+                    { "prop": "DEF", "value": 0.0729 }
+                ],
+                "activeBonuses": [
+                    { "description": "ATK +18%." },
+                    {
+                        "description": "If the wielder of this artifact set uses a Sword, Claymore or Polearm, increases their Normal Attack DMG by 35%."
+                    }
+                ]
+            },
+            {
+                "a_id": 75534,
+                "mainstat": { "prop": "CRIT DMG", "value": 0.622 },
+                "substats": [
+                    { "prop": "ATK", "value": 0.1457 },
+                    { "prop": "DEF", "value": 0.0729 },
+                    { "prop": "CRIT Rate", "value": 0.105 },
+                    { "prop": "Elemental Mastery", "value": 41.96 }
+                ],
+                "activeBonuses": [
+                    { "description": "ATK +18%." },
+                    {
+                        "description": "If the wielder of this artifact set uses a Sword, Claymore or Polearm, increases their Normal Attack DMG by 35%."
+                    }
+                ]
+            }
+        ],
+        "talents": {
+            "skillLevels": [
+                {
+                    "name": "Normal Attack: Invitation to a Beheading",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "All Is Ash",
+                    "level": { "base": 6, "extra": 0, "value": 6 }
+                },
+                {
+                    "name": "Balemoon Rising",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                }
+            ],
+            "unlockedPassiveTalents": [
+                { "name": "Agony Alone May Be Repaid" },
+                { "name": "Strength Alone Can Defend" },
+                { "name": "The Balemoon Alone May Know" }
+            ]
+        },
+        "critValue": 227
+    },
+    {
+        "attributes": {
+            "c_id": 10000026,
+            "name": "Xiao",
+            "level": 90,
+            "maxLevel": 90,
+            "friendship": 10,
+            "statsList": [
+                " - Base HP: 12,736",
+                " - HP: 4,780",
+                " - HP: 0.0%",
+                " - Base ATK: 859",
+                " - ATK: 410",
+                " - ATK: 78.7%",
+                " - Base DEF: 799",
+                " - DEF: 19",
+                " - DEF: 0.0%",
+                " - Movement SPD: 0",
+                " - Movement SPD: 0.0%",
+                " - CRIT Rate: 63.9%",
+                " - CRIT DMG: 224.0%",
+                " - Energy Recharge: 123.3%",
+                " - Healing Bonus: 0.0%",
+                " - Incoming Healing Bonus: 0.0%",
+                " - Elemental Mastery: 77",
+                " - Physical RES: 0.0%",
+                " - Physical DMG Bonus: 0.0%",
+                " - Pyro DMG Bonus: 0.0%",
+                " - Electro DMG Bonus: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - Dendro DMG Bonus: 0.0%",
+                " - Anemo DMG Bonus: 46.6%",
+                " - Geo DMG Bonus: 0.0%",
+                " - Cryo DMG Bonus: 0.0%",
+                " - Pyro RES: 0.0%",
+                " - Electro RES: 0.0%",
+                " - Hydro RES: 0.0%",
+                " - Dendro RES: 0.0%",
+                " - Anemo RES: 0.0%",
+                " - Geo RES: 0.0%",
+                " - Cryo RES: 0.0%",
+                " - Anemo DMG Bonus: 46.6%",
+                " - CD Reduction: 0.0%",
+                " - Shield Strength: 0.0%",
+                " - HP: 17,516",
+                " - Max HP: 17,516",
+                " - ATK: 1,945",
+                " - DEF: 818",
+                " - Movement SPD: 0"
+            ]
+        },
+        "weapon": {
+            "w_id": 13404,
+            "name": "Blackcliff Pole",
+            "refinementRank": 1,
+            "level": 90,
+            "maxLevel": 90,
+            "weaponStats": [
+                { "prop": "Base ATK", "value": 509.605949 },
+                { "prop": "CRIT DMG", "value": 0.55128 }
+            ]
+        },
+        "constellation": 0,
+        "artifacts": [
+            {
+                "a_id": 31544,
+                "mainstat": { "prop": "HP", "value": 4780 },
+                "substats": [
+                    { "prop": "CRIT DMG", "value": 0.1476 },
+                    { "prop": "CRIT Rate", "value": 0.07 },
+                    { "prop": "ATK", "value": 0.1341 },
+                    { "prop": "ATK", "value": 33.07 }
+                ],
+                "activeBonuses": [
+                    { "description": "Normal and Charged Attack DMG +15%" },
+                    {
+                        "description": "When current HP increases or decreases, CRIT Rate will be increased by 12% for 5s. Max 3 stacks."
+                    }
+                ]
+            },
+            {
+                "a_id": 31523,
+                "mainstat": { "prop": "ATK", "value": 311 },
+                "substats": [
+                    { "prop": "DEF", "value": 18.52 },
+                    { "prop": "CRIT DMG", "value": 0.2253 },
+                    { "prop": "CRIT Rate", "value": 0.0622 },
+                    { "prop": "Energy Recharge", "value": 0.1101 }
+                ],
+                "activeBonuses": [
+                    { "description": "Normal and Charged Attack DMG +15%" },
+                    {
+                        "description": "When current HP increases or decreases, CRIT Rate will be increased by 12% for 5s. Max 3 stacks."
+                    }
+                ]
+            },
+            {
+                "a_id": 20553,
+                "mainstat": { "prop": "ATK", "value": 0.466 },
+                "substats": [
+                    { "prop": "ATK", "value": 15.56 },
+                    { "prop": "CRIT DMG", "value": 0.0699 },
+                    { "prop": "CRIT Rate", "value": 0.1672 },
+                    { "prop": "Energy Recharge", "value": 0.0648 }
+                ],
+                "activeBonuses": [
+                    { "description": "Normal and Charged Attack DMG +15%" },
+                    {
+                        "description": "When current HP increases or decreases, CRIT Rate will be increased by 12% for 5s. Max 3 stacks."
+                    }
+                ]
+            },
+            {
+                "a_id": 31513,
+                "mainstat": { "prop": "Anemo DMG Bonus", "value": 0.466 },
+                "substats": [
+                    { "prop": "ATK", "value": 0.0525 },
+                    { "prop": "CRIT Rate", "value": 0.0972 },
+                    { "prop": "CRIT DMG", "value": 0.1244 },
+                    { "prop": "Elemental Mastery", "value": 41.96 }
+                ],
+                "activeBonuses": [
+                    { "description": "Normal and Charged Attack DMG +15%" },
+                    {
+                        "description": "When current HP increases or decreases, CRIT Rate will be increased by 12% for 5s. Max 3 stacks."
+                    }
+                ]
+            },
+            {
+                "a_id": 31534,
+                "mainstat": { "prop": "CRIT DMG", "value": 0.622 },
+                "substats": [
+                    { "prop": "Energy Recharge", "value": 0.0583 },
+                    { "prop": "Elemental Mastery", "value": 34.97 },
+                    { "prop": "ATK", "value": 50.58 },
+                    { "prop": "ATK", "value": 0.134 }
+                ],
+                "activeBonuses": [
+                    { "description": "Normal and Charged Attack DMG +15%" },
+                    {
+                        "description": "When current HP increases or decreases, CRIT Rate will be increased by 12% for 5s. Max 3 stacks."
+                    }
+                ]
+            }
+        ],
+        "talents": {
+            "skillLevels": [
+                {
+                    "name": "Normal Attack: Whirlwind Thrust",
+                    "level": { "base": 9, "extra": 0, "value": 9 }
+                },
+                {
+                    "name": "Lemniscatic Wind Cycling",
+                    "level": { "base": 6, "extra": 0, "value": 6 }
+                },
+                {
+                    "name": "Bane of All Evil",
+                    "level": { "base": 9, "extra": 0, "value": 9 }
+                }
+            ],
+            "unlockedPassiveTalents": [
+                { "name": "Conqueror of Evil: Tamer of Demons" },
+                { "name": "Dissolution Eon: Heaven Fall" },
+                { "name": "Transcension: Gravity Defier" }
+            ]
+        },
+        "critValue": 198.24
+    },
+    {
+        "attributes": {
+            "c_id": 10000091,
+            "name": "Navia",
+            "level": 90,
+            "maxLevel": 90,
+            "friendship": 10,
+            "statsList": [
+                " - Base HP: 12,650",
+                " - HP: 5,557",
+                " - HP: 4.7%",
+                " - Base ATK: 1,026",
+                " - ATK: 340",
+                " - ATK: 127.2%",
+                " - Base DEF: 793",
+                " - DEF: 56",
+                " - DEF: 14.6%",
+                " - Movement SPD: 0",
+                " - Movement SPD: 0.0%",
+                " - CRIT Rate: 74.5%",
+                " - CRIT DMG: 201.9%",
+                " - Energy Recharge: 106.5%",
+                " - Healing Bonus: 0.0%",
+                " - Incoming Healing Bonus: 0.0%",
+                " - Elemental Mastery: 35",
+                " - Physical RES: 0.0%",
+                " - Physical DMG Bonus: 0.0%",
+                " - Pyro DMG Bonus: 0.0%",
+                " - Electro DMG Bonus: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - Dendro DMG Bonus: 0.0%",
+                " - Anemo DMG Bonus: 0.0%",
+                " - Geo DMG Bonus: 46.6%",
+                " - Cryo DMG Bonus: 0.0%",
+                " - Pyro RES: 0.0%",
+                " - Electro RES: 0.0%",
+                " - Hydro RES: 0.0%",
+                " - Dendro RES: 0.0%",
+                " - Anemo RES: 0.0%",
+                " - Geo RES: 0.0%",
+                " - Cryo RES: 0.0%",
+                " - Geo DMG Bonus: 46.6%",
+                " - CD Reduction: 0.0%",
+                " - Shield Strength: 0.0%",
+                " - HP: 18,796",
+                " - Max HP: 18,796",
+                " - ATK: 2,671",
+                " - DEF: 964",
+                " - Movement SPD: 0"
+            ]
+        },
+        "weapon": {
+            "w_id": 12512,
+            "name": "Verdict",
+            "refinementRank": 1,
+            "level": 90,
+            "maxLevel": 90,
+            "weaponStats": [
+                { "prop": "Base ATK", "value": 674.334546 },
+                { "prop": "CRIT Rate", "value": 0.220512 }
+            ]
+        },
+        "constellation": 0,
+        "artifacts": [
+            {
+                "a_id": 34544,
+                "mainstat": { "prop": "HP", "value": 4780 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.105 },
+                    { "prop": "CRIT DMG", "value": 0.2175 },
+                    { "prop": "DEF", "value": 37.03 },
+                    { "prop": "DEF", "value": 0.0729 }
+                ],
+                "activeBonuses": [
+                    { "description": "ATK +18%." },
+                    {
+                        "description": "After using an Elemental Skill, gain a 20% Geo DMG Bonus for 10s. While under a shield granted by the Crystallize reaction, the above effect will be increased by 150%, and this additional increase disappears 1s after that shield is lost."
+                    }
+                ]
+            },
+            {
+                "a_id": 34523,
+                "mainstat": { "prop": "ATK", "value": 311 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.0389 },
+                    { "prop": "CRIT DMG", "value": 0.2175 },
+                    { "prop": "HP", "value": 209.13 },
+                    { "prop": "ATK", "value": 0.1633 }
+                ],
+                "activeBonuses": [
+                    { "description": "ATK +18%." },
+                    {
+                        "description": "After using an Elemental Skill, gain a 20% Geo DMG Bonus for 10s. While under a shield granted by the Crystallize reaction, the above effect will be increased by 150%, and this additional increase disappears 1s after that shield is lost."
+                    }
+                ]
+            },
+            {
+                "a_id": 34553,
+                "mainstat": { "prop": "ATK", "value": 0.466 },
+                "substats": [
+                    { "prop": "HP", "value": 567.63 },
+                    { "prop": "HP", "value": 0.0466 },
+                    { "prop": "CRIT DMG", "value": 0.0777 },
+                    { "prop": "CRIT Rate", "value": 0.1322 }
+                ],
+                "activeBonuses": [
+                    { "description": "ATK +18%." },
+                    {
+                        "description": "After using an Elemental Skill, gain a 20% Geo DMG Bonus for 10s. While under a shield granted by the Crystallize reaction, the above effect will be increased by 150%, and this additional increase disappears 1s after that shield is lost."
+                    }
+                ]
+            },
+            {
+                "a_id": 34514,
+                "mainstat": { "prop": "Geo DMG Bonus", "value": 0.466 },
+                "substats": [
+                    { "prop": "DEF", "value": 18.52 },
+                    { "prop": "Elemental Mastery", "value": 34.97 },
+                    { "prop": "ATK", "value": 29.18 },
+                    { "prop": "CRIT Rate", "value": 0.1439 }
+                ],
+                "activeBonuses": [
+                    { "description": "ATK +18%." },
+                    {
+                        "description": "After using an Elemental Skill, gain a 20% Geo DMG Bonus for 10s. While under a shield granted by the Crystallize reaction, the above effect will be increased by 150%, and this additional increase disappears 1s after that shield is lost."
+                    }
+                ]
+            },
+            {
+                "a_id": 33534,
+                "mainstat": { "prop": "CRIT DMG", "value": 0.622 },
+                "substats": [
+                    { "prop": "Energy Recharge", "value": 0.0648 },
+                    { "prop": "CRIT Rate", "value": 0.0544 },
+                    { "prop": "DEF", "value": 0.0729 },
+                    { "prop": "ATK", "value": 0.2623 }
+                ],
+                "activeBonuses": [
+                    { "description": "ATK +18%." },
+                    {
+                        "description": "After using an Elemental Skill, gain a 20% Geo DMG Bonus for 10s. While under a shield granted by the Crystallize reaction, the above effect will be increased by 150%, and this additional increase disappears 1s after that shield is lost."
+                    }
+                ]
+            }
+        ],
+        "talents": {
+            "skillLevels": [
+                {
+                    "name": "Normal Attack: Blunt Refusal",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "Ceremonial Crystalshot",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "As the Sunlit Sky's Singing Salute",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                }
+            ],
+            "unlockedPassiveTalents": [
+                { "name": "Undisclosed Distribution Channels" },
+                { "name": "Mutual Assistance Network" },
+                { "name": "Painstaking Transaction" }
+            ]
+        },
+        "critValue": 208.35000000000002
+    },
+    {
+        "attributes": {
+            "c_id": 10000095,
+            "name": "Sigewinne",
+            "level": 90,
+            "maxLevel": 90,
+            "friendship": 10,
+            "statsList": [
+                " - Base HP: 13,348",
+                " - HP: 6,334",
+                " - HP: 241.2%",
+                " - Base ATK: 547",
+                " - ATK: 344",
+                " - ATK: 0.0%",
+                " - Base DEF: 500",
+                " - DEF: 116",
+                " - DEF: 5.1%",
+                " - Movement SPD: 0",
+                " - Movement SPD: 0.0%",
+                " - CRIT Rate: 33.0%",
+                " - CRIT DMG: 74.1%",
+                " - Energy Recharge: 141.5%",
+                " - Healing Bonus: 15.0%",
+                " - Incoming Healing Bonus: 0.0%",
+                " - Elemental Mastery: 42",
+                " - Physical RES: 0.0%",
+                " - Physical DMG Bonus: 0.0%",
+                " - Pyro DMG Bonus: 0.0%",
+                " - Electro DMG Bonus: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - Dendro DMG Bonus: 0.0%",
+                " - Anemo DMG Bonus: 0.0%",
+                " - Geo DMG Bonus: 0.0%",
+                " - Cryo DMG Bonus: 0.0%",
+                " - Pyro RES: 0.0%",
+                " - Electro RES: 0.0%",
+                " - Hydro RES: 0.0%",
+                " - Dendro RES: 0.0%",
+                " - Anemo RES: 0.0%",
+                " - Geo RES: 0.0%",
+                " - Cryo RES: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - CD Reduction: 0.0%",
+                " - Shield Strength: 0.0%",
+                " - HP: 49,798",
+                " - Max HP: 51,873",
+                " - ATK: 891",
+                " - DEF: 641",
+                " - Movement SPD: 0"
+            ]
+        },
+        "weapon": {
+            "w_id": 15303,
+            "name": "Recurve Bow",
+            "refinementRank": 5,
+            "level": 90,
+            "maxLevel": 90,
+            "weaponStats": [
+                { "prop": "Base ATK", "value": 354.3794 },
+                { "prop": "HP", "value": 0.469199 }
+            ]
+        },
+        "constellation": 0,
+        "artifacts": [
+            {
+                "a_id": 33544,
+                "mainstat": { "prop": "HP", "value": 4780 },
+                "substats": [
+                    { "prop": "HP", "value": 0.1399 },
+                    { "prop": "DEF", "value": 34.72 },
+                    { "prop": "CRIT DMG", "value": 0.1788 },
+                    { "prop": "CRIT Rate", "value": 0.0389 }
+                ],
+                "activeBonuses": [
+                    { "description": "Healing Bonus +15%." },
+                    {
+                        "description": "When the equipping character heals a party member, the Yearning effect will be created for 6s, which records the total amount of healing provided (including overflow healing). When the duration expires, the Yearning effect will be transformed into the \"Waves of Days Past\" effect: When your active party member hits an opponent with a Normal Attack, Charged Attack, Plunging Attack, Elemental Skill, or Elemental Burst, the DMG dealt will be increased by 8% of the total healing amount recorded by the Yearning effect. The \"Waves of Days Past\" effect is removed after it has taken effect 5 times or after 10s. A single instance of the Yearning effect can record up to 15,000 healing, and only a single instance can exist at once, but it can record the healing from multiple equipping characters. Equipping characters on standby can still trigger this effect."
+                    }
+                ]
+            },
+            {
+                "a_id": 33523,
+                "mainstat": { "prop": "ATK", "value": 311 },
+                "substats": [
+                    { "prop": "HP", "value": 0.1166 },
+                    { "prop": "CRIT DMG", "value": 0.0622 },
+                    { "prop": "CRIT Rate", "value": 0.0972 },
+                    { "prop": "Energy Recharge", "value": 0.1231 }
+                ],
+                "activeBonuses": [
+                    { "description": "Healing Bonus +15%." },
+                    {
+                        "description": "When the equipping character heals a party member, the Yearning effect will be created for 6s, which records the total amount of healing provided (including overflow healing). When the duration expires, the Yearning effect will be transformed into the \"Waves of Days Past\" effect: When your active party member hits an opponent with a Normal Attack, Charged Attack, Plunging Attack, Elemental Skill, or Elemental Burst, the DMG dealt will be increased by 8% of the total healing amount recorded by the Yearning effect. The \"Waves of Days Past\" effect is removed after it has taken effect 5 times or after 10s. A single instance of the Yearning effect can record up to 15,000 healing, and only a single instance can exist at once, but it can record the healing from multiple equipping characters. Equipping characters on standby can still trigger this effect."
+                    }
+                ]
+            },
+            {
+                "a_id": 33553,
+                "mainstat": { "prop": "HP", "value": 0.466 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.0739 },
+                    { "prop": "Energy Recharge", "value": 0.1231 },
+                    { "prop": "DEF", "value": 60.18 },
+                    { "prop": "DEF", "value": 0.051 }
+                ],
+                "activeBonuses": [
+                    { "description": "Healing Bonus +15%." },
+                    {
+                        "description": "When the equipping character heals a party member, the Yearning effect will be created for 6s, which records the total amount of healing provided (including overflow healing). When the duration expires, the Yearning effect will be transformed into the \"Waves of Days Past\" effect: When your active party member hits an opponent with a Normal Attack, Charged Attack, Plunging Attack, Elemental Skill, or Elemental Burst, the DMG dealt will be increased by 8% of the total healing amount recorded by the Yearning effect. The \"Waves of Days Past\" effect is removed after it has taken effect 5 times or after 10s. A single instance of the Yearning effect can record up to 15,000 healing, and only a single instance can exist at once, but it can record the healing from multiple equipping characters. Equipping characters on standby can still trigger this effect."
+                    }
+                ]
+            },
+            {
+                "a_id": 33513,
+                "mainstat": { "prop": "HP", "value": 0.466 },
+                "substats": [
+                    { "prop": "Elemental Mastery", "value": 41.96 },
+                    { "prop": "CRIT Rate", "value": 0.035 },
+                    { "prop": "ATK", "value": 33.07 },
+                    { "prop": "HP", "value": 776.76 }
+                ],
+                "activeBonuses": [
+                    { "description": "Healing Bonus +15%." },
+                    {
+                        "description": "When the equipping character heals a party member, the Yearning effect will be created for 6s, which records the total amount of healing provided (including overflow healing). When the duration expires, the Yearning effect will be transformed into the \"Waves of Days Past\" effect: When your active party member hits an opponent with a Normal Attack, Charged Attack, Plunging Attack, Elemental Skill, or Elemental Burst, the DMG dealt will be increased by 8% of the total healing amount recorded by the Yearning effect. The \"Waves of Days Past\" effect is removed after it has taken effect 5 times or after 10s. A single instance of the Yearning effect can record up to 15,000 healing, and only a single instance can exist at once, but it can record the healing from multiple equipping characters. Equipping characters on standby can still trigger this effect."
+                    }
+                ]
+            },
+            {
+                "a_id": 33533,
+                "mainstat": { "prop": "HP", "value": 0.466 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.035 },
+                    { "prop": "HP", "value": 776.76 },
+                    { "prop": "Energy Recharge", "value": 0.1684 },
+                    { "prop": "DEF", "value": 20.83 }
+                ],
+                "activeBonuses": [
+                    { "description": "Healing Bonus +15%." },
+                    {
+                        "description": "When the equipping character heals a party member, the Yearning effect will be created for 6s, which records the total amount of healing provided (including overflow healing). When the duration expires, the Yearning effect will be transformed into the \"Waves of Days Past\" effect: When your active party member hits an opponent with a Normal Attack, Charged Attack, Plunging Attack, Elemental Skill, or Elemental Burst, the DMG dealt will be increased by 8% of the total healing amount recorded by the Yearning effect. The \"Waves of Days Past\" effect is removed after it has taken effect 5 times or after 10s. A single instance of the Yearning effect can record up to 15,000 healing, and only a single instance can exist at once, but it can record the healing from multiple equipping characters. Equipping characters on standby can still trigger this effect."
+                    }
+                ]
+            }
+        ],
+        "talents": {
+            "skillLevels": [
+                {
+                    "name": "Normal Attack: Targeted Treatment",
+                    "level": { "base": 1, "extra": 0, "value": 1 }
+                },
+                {
+                    "name": "Rebound Hydrotherapy",
+                    "level": { "base": 9, "extra": 0, "value": 9 }
+                },
+                {
+                    "name": "Super Saturated Syringing",
+                    "level": { "base": 1, "extra": 0, "value": 1 }
+                }
+            ],
+            "unlockedPassiveTalents": [
+                { "name": "Requires Appropriate Rest" },
+                { "name": "Detailed Diagnosis, Thorough Treatment" },
+                { "name": "Emergency Dose" }
+            ]
+        },
+        "critValue": 80.1
+    },
+    {
+        "attributes": {
+            "c_id": 10000106,
+            "name": "Mavuika",
+            "level": 90,
+            "maxLevel": 90,
+            "friendship": 7,
+            "statsList": [
+                " - Base HP: 12,552",
+                " - HP: 5,288",
+                " - HP: 0.0%",
+                " - Base ATK: 901",
+                " - ATK: 362",
+                " - ATK: 21.0%",
+                " - Base DEF: 792",
+                " - DEF: 0",
+                " - DEF: 28.0%",
+                " - Movement SPD: 0",
+                " - Movement SPD: 0.0%",
+                " - CRIT Rate: 63.7%",
+                " - CRIT DMG: 269.9%",
+                " - Energy Recharge: 118.1%",
+                " - Healing Bonus: 0.0%",
+                " - Incoming Healing Bonus: 0.0%",
+                " - Elemental Mastery: 266",
+                " - Physical RES: 0.0%",
+                " - Physical DMG Bonus: 0.0%",
+                " - Pyro DMG Bonus: 46.6%",
+                " - Electro DMG Bonus: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - Dendro DMG Bonus: 0.0%",
+                " - Anemo DMG Bonus: 0.0%",
+                " - Geo DMG Bonus: 0.0%",
+                " - Cryo DMG Bonus: 0.0%",
+                " - Pyro RES: 0.0%",
+                " - Electro RES: 0.0%",
+                " - Hydro RES: 0.0%",
+                " - Dendro RES: 0.0%",
+                " - Anemo RES: 0.0%",
+                " - Geo RES: 0.0%",
+                " - Cryo RES: 0.0%",
+                " - Pyro DMG Bonus: 46.6%",
+                " - CD Reduction: 0.0%",
+                " - Shield Strength: 0.0%",
+                " - HP: 11,600",
+                " - Max HP: 17,840",
+                " - ATK: 1,451",
+                " - DEF: 1,013",
+                " - Movement SPD: 0"
+            ]
+        },
+        "weapon": {
+            "w_id": 12510,
+            "name": "Redhorn Stonethresher",
+            "refinementRank": 1,
+            "level": 90,
+            "maxLevel": 90,
+            "weaponStats": [
+                { "prop": "Base ATK", "value": 541.829758 },
+                { "prop": "CRIT DMG", "value": 0.882048 }
+            ]
+        },
+        "constellation": 0,
+        "artifacts": [
+            {
+                "a_id": 38543,
+                "mainstat": { "prop": "HP", "value": 4780 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.07 },
+                    { "prop": "ATK", "value": 0.0991 },
+                    { "prop": "ATK", "value": 13.62 },
+                    { "prop": "CRIT DMG", "value": 0.1788 }
+                ],
+                "activeBonuses": [
+                    {
+                        "description": "While the equipping character is in Nightsoul's Blessing and is on the field, their DMG dealt is increased by 15%."
+                    },
+                    {
+                        "description": "After the equipping character consumes 1 Nightsoul point while on the field, CRIT Rate increases by 40% for 6s. This effect can trigger once every second."
+                    }
+                ]
+            },
+            {
+                "a_id": 38523,
+                "mainstat": { "prop": "ATK", "value": 311 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.0739 },
+                    { "prop": "Energy Recharge", "value": 0.0453 },
+                    { "prop": "Elemental Mastery", "value": 18.65 },
+                    { "prop": "CRIT DMG", "value": 0.2332 }
+                ],
+                "activeBonuses": [
+                    {
+                        "description": "While the equipping character is in Nightsoul's Blessing and is on the field, their DMG dealt is increased by 15%."
+                    },
+                    {
+                        "description": "After the equipping character consumes 1 Nightsoul point while on the field, CRIT Rate increases by 40% for 6s. This effect can trigger once every second."
+                    }
+                ]
+            },
+            {
+                "a_id": 38553,
+                "mainstat": { "prop": "Elemental Mastery", "value": 186.5 },
+                "substats": [
+                    { "prop": "Energy Recharge", "value": 0.0906 },
+                    { "prop": "CRIT Rate", "value": 0.0622 },
+                    { "prop": "CRIT DMG", "value": 0.202 },
+                    { "prop": "HP", "value": 239 }
+                ],
+                "activeBonuses": [
+                    {
+                        "description": "While the equipping character is in Nightsoul's Blessing and is on the field, their DMG dealt is increased by 15%."
+                    },
+                    {
+                        "description": "After the equipping character consumes 1 Nightsoul point while on the field, CRIT Rate increases by 40% for 6s. This effect can trigger once every second."
+                    }
+                ]
+            },
+            {
+                "a_id": 28513,
+                "mainstat": { "prop": "Pyro DMG Bonus", "value": 0.466 },
+                "substats": [
+                    { "prop": "CRIT DMG", "value": 0.1321 },
+                    { "prop": "Energy Recharge", "value": 0.0453 },
+                    { "prop": "Elemental Mastery", "value": 60.61 },
+                    { "prop": "CRIT Rate", "value": 0.07 }
+                ],
+                "activeBonuses": [
+                    {
+                        "description": "While the equipping character is in Nightsoul's Blessing and is on the field, their DMG dealt is increased by 15%."
+                    },
+                    {
+                        "description": "After the equipping character consumes 1 Nightsoul point while on the field, CRIT Rate increases by 40% for 6s. This effect can trigger once every second."
+                    }
+                ]
+            },
+            {
+                "a_id": 38533,
+                "mainstat": { "prop": "CRIT Rate", "value": 0.311 },
+                "substats": [
+                    { "prop": "HP", "value": 268.88 },
+                    { "prop": "CRIT DMG", "value": 0.1865 },
+                    { "prop": "ATK", "value": 0.1108 },
+                    { "prop": "ATK", "value": 36.96 }
+                ],
+                "activeBonuses": [
+                    {
+                        "description": "While the equipping character is in Nightsoul's Blessing and is on the field, their DMG dealt is increased by 15%."
+                    },
+                    {
+                        "description": "After the equipping character consumes 1 Nightsoul point while on the field, CRIT Rate increases by 40% for 6s. This effect can trigger once every second."
+                    }
+                ]
+            }
+        ],
+        "talents": {
+            "skillLevels": [
+                {
+                    "name": "Normal Attack: Flames Weave Life",
+                    "level": { "base": 1, "extra": 0, "value": 1 }
+                },
+                {
+                    "name": "The Named Moment",
+                    "level": { "base": 9, "extra": 0, "value": 9 }
+                },
+                {
+                    "name": "Hour of Burning Skies",
+                    "level": { "base": 9, "extra": 0, "value": 9 }
+                }
+            ],
+            "unlockedPassiveTalents": [
+                { "name": "Gift of Flaming Flowers" },
+                { "name": "\"Kiongozi\"" },
+                { "name": "Night Realm's Gift: Exhaust Mode" },
+                { "name": "Night-Shattering Radiance" }
+            ]
+        },
+        "critValue": 210.68
+    },
+    {
+        "attributes": {
+            "c_id": 10000002,
+            "name": "Kamisato Ayaka",
+            "level": 90,
+            "maxLevel": 90,
+            "friendship": 10,
+            "statsList": [
+                " - Base HP: 12,858",
+                " - HP: 5,527",
+                " - HP: 0.0%",
+                " - Base ATK: 796",
+                " - ATK: 375",
+                " - ATK: 126.2%",
+                " - Base DEF: 784",
+                " - DEF: 0",
+                " - DEF: 5.1%",
+                " - Movement SPD: 0",
+                " - Movement SPD: 0.0%",
+                " - CRIT Rate: 34.9%",
+                " - CRIT DMG: 247.0%",
+                " - Energy Recharge: 111.0%",
+                " - Healing Bonus: 0.0%",
+                " - Incoming Healing Bonus: 0.0%",
+                " - Elemental Mastery: 58",
+                " - Physical RES: 0.0%",
+                " - Physical DMG Bonus: 0.0%",
+                " - Pyro DMG Bonus: 0.0%",
+                " - Electro DMG Bonus: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - Dendro DMG Bonus: 0.0%",
+                " - Anemo DMG Bonus: 0.0%",
+                " - Geo DMG Bonus: 0.0%",
+                " - Cryo DMG Bonus: 61.6%",
+                " - Pyro RES: 0.0%",
+                " - Electro RES: 0.0%",
+                " - Hydro RES: 0.0%",
+                " - Dendro RES: 0.0%",
+                " - Anemo RES: 0.0%",
+                " - Geo RES: 0.0%",
+                " - Cryo RES: 0.0%",
+                " - Cryo DMG Bonus: 61.6%",
+                " - CD Reduction: 0.0%",
+                " - Shield Strength: 0.0%",
+                " - HP: 18,385",
+                " - Max HP: 18,385",
+                " - ATK: 2,177",
+                " - DEF: 824",
+                " - Movement SPD: 0"
+            ]
+        },
+        "weapon": {
+            "w_id": 11414,
+            "name": "Amenoma Kageuchi",
+            "refinementRank": 5,
+            "level": 90,
+            "maxLevel": 90,
+            "weaponStats": [
+                { "prop": "Base ATK", "value": 454.3631525 },
+                { "prop": "ATK", "value": 0.55128 }
+            ]
+        },
+        "constellation": 0,
+        "artifacts": [
+            {
+                "a_id": 71544,
+                "mainstat": { "prop": "HP", "value": 4780 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.0778 },
+                    { "prop": "Elemental Mastery", "value": 18.65 },
+                    { "prop": "ATK", "value": 48.63 },
+                    { "prop": "CRIT DMG", "value": 0.2098 }
+                ],
+                "activeBonuses": [
+                    { "description": "Cryo DMG Bonus +15%" },
+                    {
+                        "description": "When a character attacks an opponent affected by Cryo, their CRIT Rate is increased by 20%. If the opponent is Frozen, CRIT Rate is increased by an additional 20%."
+                    }
+                ]
+            },
+            {
+                "a_id": 71523,
+                "mainstat": { "prop": "ATK", "value": 311 },
+                "substats": [
+                    { "prop": "CRIT DMG", "value": 0.2642 },
+                    { "prop": "ATK", "value": 0.0525 },
+                    { "prop": "CRIT Rate", "value": 0.0389 },
+                    { "prop": "Elemental Mastery", "value": 39.63 }
+                ],
+                "activeBonuses": [
+                    { "description": "Cryo DMG Bonus +15%" },
+                    {
+                        "description": "When a character attacks an opponent affected by Cryo, their CRIT Rate is increased by 20%. If the opponent is Frozen, CRIT Rate is increased by an additional 20%."
+                    }
+                ]
+            },
+            {
+                "a_id": 71553,
+                "mainstat": { "prop": "ATK", "value": 0.466 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.035 },
+                    { "prop": "CRIT DMG", "value": 0.2564 },
+                    { "prop": "ATK", "value": 15.56 },
+                    { "prop": "HP", "value": 507.88 }
+                ],
+                "activeBonuses": [
+                    { "description": "Cryo DMG Bonus +15%" },
+                    {
+                        "description": "When a character attacks an opponent affected by Cryo, their CRIT Rate is increased by 20%. If the opponent is Frozen, CRIT Rate is increased by an additional 20%."
+                    }
+                ]
+            },
+            {
+                "a_id": 77513,
+                "mainstat": { "prop": "Cryo DMG Bonus", "value": 0.466 },
+                "substats": [
+                    { "prop": "ATK", "value": 0.0583 },
+                    { "prop": "Energy Recharge", "value": 0.1101 },
+                    { "prop": "CRIT Rate", "value": 0.0661 },
+                    { "prop": "CRIT DMG", "value": 0.2331 }
+                ],
+                "activeBonuses": [
+                    { "description": "Cryo DMG Bonus +15%" },
+                    {
+                        "description": "When a character attacks an opponent affected by Cryo, their CRIT Rate is increased by 20%. If the opponent is Frozen, CRIT Rate is increased by an additional 20%."
+                    }
+                ]
+            },
+            {
+                "a_id": 71533,
+                "mainstat": { "prop": "CRIT DMG", "value": 0.622 },
+                "substats": [
+                    { "prop": "ATK", "value": 0.134 },
+                    { "prop": "HP", "value": 239 },
+                    { "prop": "DEF", "value": 0.051 },
+                    { "prop": "CRIT Rate", "value": 0.0816 }
+                ],
+                "activeBonuses": [
+                    { "description": "Cryo DMG Bonus +15%" },
+                    {
+                        "description": "When a character attacks an opponent affected by Cryo, their CRIT Rate is increased by 20%. If the opponent is Frozen, CRIT Rate is increased by an additional 20%."
+                    }
+                ]
+            }
+        ],
+        "talents": {
+            "skillLevels": [
+                {
+                    "name": "Normal Attack: Kamisato Art - Kabuki",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "Kamisato Art: Hyouka",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "Kamisato Art: Soumetsu",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                }
+            ],
+            "unlockedPassiveTalents": [
+                { "name": "Amatsumi Kunitsumi Sanctification" },
+                { "name": "Kanten Senmyou Blessing" },
+                { "name": "Fruits of Shinsa" }
+            ]
+        },
+        "critValue": 218.42999999999998
+    },
+    {
+        "attributes": {
+            "c_id": 10000037,
+            "name": "Ganyu",
+            "level": 90,
+            "maxLevel": 90,
+            "friendship": 10,
+            "statsList": [
+                " - Base HP: 9,797",
+                " - HP: 5,049",
+                " - HP: 0.0%",
+                " - Base ATK: 844",
+                " - ATK: 377",
+                " - ATK: 47.2%",
+                " - Base DEF: 630",
+                " - DEF: 65",
+                " - DEF: 0.0%",
+                " - Movement SPD: 0",
+                " - Movement SPD: 0.0%",
+                " - CRIT Rate: 51.7%",
+                " - CRIT DMG: 211.2%",
+                " - Energy Recharge: 116.8%",
+                " - Healing Bonus: 0.0%",
+                " - Incoming Healing Bonus: 0.0%",
+                " - Elemental Mastery: 397",
+                " - Physical RES: 0.0%",
+                " - Physical DMG Bonus: 0.0%",
+                " - Pyro DMG Bonus: 0.0%",
+                " - Electro DMG Bonus: 0.0%",
+                " - Hydro DMG Bonus: 0.0%",
+                " - Dendro DMG Bonus: 0.0%",
+                " - Anemo DMG Bonus: 0.0%",
+                " - Geo DMG Bonus: 0.0%",
+                " - Cryo DMG Bonus: 46.6%",
+                " - Pyro RES: 0.0%",
+                " - Electro RES: 0.0%",
+                " - Hydro RES: 0.0%",
+                " - Dendro RES: 0.0%",
+                " - Anemo RES: 0.0%",
+                " - Geo RES: 0.0%",
+                " - Cryo RES: 0.0%",
+                " - Cryo DMG Bonus: 46.6%",
+                " - CD Reduction: 0.0%",
+                " - Shield Strength: 0.0%",
+                " - HP: 14,846",
+                " - Max HP: 14,846",
+                " - ATK: 1,620",
+                " - DEF: 695",
+                " - Movement SPD: 0"
+            ]
+        },
+        "weapon": {
+            "w_id": 15406,
+            "name": "Prototype Crescent",
+            "refinementRank": 5,
+            "level": 90,
+            "maxLevel": 90,
+            "weaponStats": [
+                { "prop": "Base ATK", "value": 509.605949 },
+                { "prop": "ATK", "value": 0.41346 }
+            ]
+        },
+        "constellation": 0,
+        "artifacts": [
+            {
+                "a_id": 77543,
+                "mainstat": { "prop": "HP", "value": 4780 },
+                "substats": [
+                    { "prop": "CRIT DMG", "value": 0.1321 },
+                    { "prop": "Elemental Mastery", "value": 37.3 },
+                    { "prop": "CRIT Rate", "value": 0.0933 },
+                    { "prop": "ATK", "value": 17.51 }
+                ],
+                "activeBonuses": [
+                    { "description": "Increases Elemental Mastery by 80." },
+                    {
+                        "description": "Increases Charged Attack DMG by 35% if the character uses a Catalyst or a Bow."
+                    }
+                ]
+            },
+            {
+                "a_id": 77524,
+                "mainstat": { "prop": "ATK", "value": 311 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.1128 },
+                    { "prop": "HP", "value": 268.88 },
+                    { "prop": "Energy Recharge", "value": 0.1684 },
+                    { "prop": "CRIT DMG", "value": 0.1399 }
+                ],
+                "activeBonuses": [
+                    { "description": "Increases Elemental Mastery by 80." },
+                    {
+                        "description": "Increases Charged Attack DMG by 35% if the character uses a Catalyst or a Bow."
+                    }
+                ]
+            },
+            {
+                "a_id": 77554,
+                "mainstat": { "prop": "Elemental Mastery", "value": 186.5 },
+                "substats": [
+                    { "prop": "DEF", "value": 23.15 },
+                    { "prop": "CRIT DMG", "value": 0.1943 },
+                    { "prop": "ATK", "value": 33.07 },
+                    { "prop": "CRIT Rate", "value": 0.0972 }
+                ],
+                "activeBonuses": [
+                    { "description": "Increases Elemental Mastery by 80." },
+                    {
+                        "description": "Increases Charged Attack DMG by 35% if the character uses a Catalyst or a Bow."
+                    }
+                ]
+            },
+            {
+                "a_id": 93513,
+                "mainstat": { "prop": "Cryo DMG Bonus", "value": 0.466 },
+                "substats": [
+                    { "prop": "Elemental Mastery", "value": 58.28 },
+                    { "prop": "CRIT Rate", "value": 0.0661 },
+                    { "prop": "CRIT DMG", "value": 0.1398 },
+                    { "prop": "ATK", "value": 0.0583 }
+                ],
+                "activeBonuses": [
+                    { "description": "Increases Elemental Mastery by 80." },
+                    {
+                        "description": "Increases Charged Attack DMG by 35% if the character uses a Catalyst or a Bow."
+                    }
+                ]
+            },
+            {
+                "a_id": 77533,
+                "mainstat": { "prop": "CRIT DMG", "value": 0.622 },
+                "substats": [
+                    { "prop": "CRIT Rate", "value": 0.0972 },
+                    { "prop": "Elemental Mastery", "value": 34.97 },
+                    { "prop": "DEF", "value": 41.67 },
+                    { "prop": "ATK", "value": 15.56 }
+                ],
+                "activeBonuses": [
+                    { "description": "Increases Elemental Mastery by 80." },
+                    {
+                        "description": "Increases Charged Attack DMG by 35% if the character uses a Catalyst or a Bow."
+                    }
+                ]
+            }
+        ],
+        "talents": {
+            "skillLevels": [
+                {
+                    "name": "Normal Attack: Liutian Archery",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                },
+                {
+                    "name": "Trail of the Qilin",
+                    "level": { "base": 6, "extra": 0, "value": 6 }
+                },
+                {
+                    "name": "Celestial Shower",
+                    "level": { "base": 10, "extra": 0, "value": 10 }
+                }
+            ],
+            "unlockedPassiveTalents": [
+                { "name": "Undivided Heart" },
+                { "name": "Harmony Between Heaven and Earth" },
+                { "name": "Preserved for the Hunt" }
+            ]
+        },
+        "critValue": 216.13
+    }
+]

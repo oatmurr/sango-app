@@ -2,53 +2,41 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import axios from "axios";
+import { Button } from "@headlessui/react";
 
 function App() {
-    interface Character {
-        name: string;
-        roundedCritValue: number;
-    }
-
-    // const [characterData, setCharacterData] = useState<Character[]>([]);
-    // const handleButtonClick = () => {
-    //     axios.get("http://localhost:3000/u/").then((response) => {
-    //         console.log(response.data);
-    //         setCharacterData(response.data);
-    //     });
-    // };
-
-    // return (
-    //     <>
-    //         <div className="card">
-    //             <button onClick={handleButtonClick}>
-    //                 Fetch Character Data
-    //             </button>
-    //             <ul>
-    //                 {characterData.map((character, index) => (
-    //                     <li key={index}>
-    //                         {character.name}: {character.roundedCritValue}
-    //                     </li>
-    //                 ))}
-    //             </ul>
-    //         </div>
-    //     </>
-    // );
-
-    const [message, setMessage] = useState("");
-    const handleButtonClick = () => {
-        axios.get("http://localhost:3000/").then((data) => {
-            console.log(data);
-            setMessage("test");
-        });
-    };
+    const [count, setCount] = useState(0);
 
     return (
         <>
-            <div className="card">
-                <button onClick={() => handleButtonClick()}></button>
-                <p>{message}</p>
+            <div>
+                <a href="https://vite.dev" target="_blank">
+                    <img src={viteLogo} className="logo" alt="Vite logo" />
+                </a>
+                <a href="https://react.dev" target="_blank">
+                    <img
+                        src={reactLogo}
+                        className="logo react"
+                        alt="React logo"
+                    />
+                </a>
             </div>
+            <h1>Vite + React</h1>
+            <div className="space-x-10">
+                <button
+                    className="bg-sky-500/100 "
+                    onClick={() => setCount((count) => count + 1)}
+                >
+                    count is {count}
+                </button>
+                <Button className="bg-sky-500/100">Save changes</Button>
+                <p>
+                    Edit <code>src/App.tsx</code> and save to test HMR
+                </p>
+            </div>
+            <p className="text-3xl text-purple-600 font-bold underline">
+                Click on the Vite and React logos to learn more
+            </p>
         </>
     );
 }
