@@ -205,61 +205,69 @@ function prepareStatements()
 
 function populateTables(enka: EnkaClient)
 {
-    // populate characters table
-    const character = enka.getAllCharacters();
-    character.forEach((c) =>
+    try
     {
-        const row = dbSelectCharacterStmt.get(c.name.get());
-        if (!row)
+        // populate characters table
+        const characters = enka.getAllCharacters();
+        characters.forEach((c) =>
         {
-            if (c.element)
+            const row = dbSelectCharacterStmt.get(c.name.get());
+            if (!row)
             {
-                dbInsertCharacterStmt.run(
-                    c.id,
-                    c.name.get(),
-                    c.icon.url || placeholder_url,
-                    c.stars,
-                    c.element.name.get(),
-                    c.weaponType
+                if (c.element)
+                {
+                    dbInsertCharacterStmt.run(
+                        c.id,
+                        c.name.get(),
+                        c.icon.url || placeholder_url,
+                        c.stars,
+                        c.element.name.get(),
+                        c.weaponType
+                    );
+                }
+            }
+        });
+
+        // populate weapons table
+        const weapons = enka.getAllWeapons();
+        weapons.forEach((w) =>
+        {
+            const row = dbSelectWeaponStmt.get(w.name.get());
+            if (!row)
+            {
+                dbInsertWeaponStmt.run(
+                    w.id,
+                    w.name.get(),
+                    w.icon.url || placeholder_url,
+                    w.stars,
+                    w.weaponType
                 );
             }
-        }
-    });
+        });
 
-    // populate weapons table
-    const weapon = enka.getAllWeapons();
-    weapon.forEach((w) =>
-    {
-        const row = dbSelectWeaponStmt.get(w.name.get());
-        if (!row)
+        // populate artifacts table
+        const artifacts = enka.getAllArtifacts();
+        artifacts.forEach((a) =>
         {
-            dbInsertWeaponStmt.run(
-                w.id,
-                w.name.get(),
-                w.icon.url || placeholder_url,
-                w.stars,
-                w.weaponType
-            );
-        }
-    });
+            const row = dbSelectArtifactStmt.get(a.name.get());
+            if (!row)
+            {
+                dbInsertArtifactStmt.run(
+                    a.id,
+                    a.name.get(),
+                    a.icon.url || placeholder_url,
+                    a.stars,
+                    a.equipType,
+                    a.set.name.get()
+                );
+            }
+        });
+    }
+    catch (error)
+    {
+        console.error("Error populating tables:", error);
+    }
 
-    // populate artifacts table
-    const artifact = enka.getAllArtifacts();
-    artifact.forEach((a) =>
-    {
-        const row = dbSelectArtifactStmt.get(a.name.get());
-        if (!row)
-        {
-            dbInsertArtifactStmt.run(
-                a.id,
-                a.name.get(),
-                a.icon.url || placeholder_url,
-                a.stars,
-                a.equipType,
-                a.set.name.get()
-            );
-        }
-    });
 }
 
 export function dbInsertCharacter
