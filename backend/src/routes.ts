@@ -1,9 +1,8 @@
-import { app } from "./index";
-import { enka } from "./index";
+import { Express } from "express";
 import { EnkaClient, ArtifactSet } from "enka-network-api";
 import { dbInsertUserBuild, dbInsertUserArtifact } from "./db";
 
-export function routes() {
+export function routes(app: Express, enka: EnkaClient) {
     app.get("/fetch-characters", (req, res) => {
         const characters = enka.getAllCharacters();
 

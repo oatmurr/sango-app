@@ -1,20 +1,42 @@
 import express from "express";
-import { EnkaClient, ArtifactSet } from "enka-network-api";
-import fs from "fs";
+import { EnkaClient } from "enka-network-api";
 import { dbInit } from "./db";
-import sqlite3 from "sqlite3";
 import { routes } from "./routes";
 
 export const enka = new EnkaClient({ showFetchCacheLog: true }); // showFetchCacheLog is true by default
 
-enka.cachedAssetsManager.fetchAllContents(); // returns promise
-enka.cachedAssetsManager.refreshAllData();
+// enka.cachedAssetsManager.fetchAllContents(); // returns promise
+// enka.cachedAssetsManager.refreshAllData();
 
 export const app = express();
 const port = 3000;
 
-dbInit();
-routes();
+async function initialise()
+{
+    try
+    {
+        await enka.cachedAssetsManager.fetchAllContents();
+        enka.cachedAssetsManager.refreshAllData();
+
+        dbInit(enka);
+        // routes(app, enka);
+
+        // testing
+        // const characters = enka.getAllCharacters();
+        // console.log(characters.map(c => c.name.get("en")));
+
+        // start server
+        app.listen(port, () => {
+            console.log(`Example app listening on port ${port}`);
+        });
+    }
+    catch (error)
+    {
+        console.error(error);
+    }
+}
+initialise();
+
 // https://enka-network-api.vercel.app/docs
 // enka.cachedAssetsManager.activateAutoCacheUpdater({
 //     instant: true, // Run the first update check immediately
@@ -27,7 +49,3 @@ routes();
 //         console.log("Updating Completed!");
 //     },
 // });
-
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-});
