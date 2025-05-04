@@ -1,45 +1,47 @@
 import { Express } from "express";
 import { EnkaClient, ArtifactSet } from "enka-network-api";
-import { dbInsertUserBuild, dbInsertUserArtifact } from "./db";
+import { dbInsertUserBuild, dbInsertUserArtifact, dbInsertUser } from "./db";
+import { parse } from "path";
 
-export function routes(app: Express, enka: EnkaClient) {
-    app.get("/fetch-characters", (req, res) => {
-        const characters = enka.getAllCharacters();
+export function routes(app: Express, enka: EnkaClient)
+{
+    // app.get("/fetch-characters", (req, res) => {
+    //     const characters = enka.getAllCharacters();
 
-        const data = characters.map((c) => ({
-            name: c.name.get(),
-            id: c.id,
-            element: c.element ? c.element.name.get() : null,
-            weaponType: c.weaponType,
-        }));
+    //     const data = characters.map((c) => ({
+    //         name: c.name.get(),
+    //         id: c.id,
+    //         element: c.element ? c.element.name.get() : null,
+    //         weaponType: c.weaponType,
+    //     }));
 
-        res.send(data);
-    });
+    //     res.send(data);
+    // });
 
-    app.get("/fetch-weapons", (req, res) => {
-        const weapons = enka.getAllWeapons();
+    // app.get("/fetch-weapons", (req, res) => {
+    //     const weapons = enka.getAllWeapons();
 
-        const data = weapons.map((w) => ({
-            name: w.name.get(),
-            id: w.id,
-            type: w.weaponType,
-        }));
+    //     const data = weapons.map((w) => ({
+    //         name: w.name.get(),
+    //         id: w.id,
+    //         type: w.weaponType,
+    //     }));
 
-        res.send(data);
-    });
+    //     res.send(data);
+    // });
 
-    app.get("/fetch-artifacts", (req, res) => {
-        const artifacts = enka.getAllArtifacts();
+    // app.get("/fetch-artifacts", (req, res) => {
+    //     const artifacts = enka.getAllArtifacts();
 
-        const data = artifacts.map((a) => ({
-            name: a.name.get(),
-            type: a.equipType,
-            id: a.id,
-            set: a.set.name.get(),
-        }));
+    //     const data = artifacts.map((a) => ({
+    //         name: a.name.get(),
+    //         type: a.equipType,
+    //         id: a.id,
+    //         set: a.set.name.get(),
+    //     }));
 
-        res.send(data);
-    });
+    //     res.send(data);
+    // });
 
     // app.get("/u", async (req, res) => {
     //     const builds = req.body;
@@ -64,58 +66,89 @@ export function routes(app: Express, enka: EnkaClient) {
     //     res.json({ message: "builds loaded successfully" });
     // });
 
-    async function parseBuilds(uid: number, builds: any) {
-        const parsedBuilds = await Promise.all(
-            builds.map(async (b: any) => {
-                return {
-                    u_id: uid,
-                    c_id: b.attributes.c_id,
-                    w_id: b.weapon.w_id,
-                    a1_flower: await parseArtifact(uid, b.artifacts[0]),
-                    a2_feather: await parseArtifact(uid, b.artifacts[1]),
-                    a3_sands: await parseArtifact(uid, b.artifacts[2]),
-                    a4_goblet: await parseArtifact(uid, b.artifacts[3]),
-                    a5_circlet: await parseArtifact(uid, b.artifacts[4]),
-                    // a_id1_flower: b.artifacts[0].a_id,
-                    // a_id2_feather: b.artifacts[1].a_id,
-                    // a_id3_sands: b.artifacts[2].a_id,
-                    // a_id4_goblet: b.artifacts[3].a_id,
-                    // a_id5_circlet: b.artifacts[4].a_id,
-                };
-            })
-        );
+    async function parseBuilds(uid: number, builds: any)
+    {
+        try
+        {
+            const parsedBuilds = await Promise.all(
+                builds.map(async (b: any) => {
+                    return {
+                        u_id: uid,
+                        c_id: b.attributes.c_id,
+                        w_id: b.weapon.w_id,
+                        a1_flower: await parseArtifact(uid, b.artifacts[0]),
+                        a2_feather: await parseArtifact(uid, b.artifacts[1]),
+                        a3_sands: await parseArtifact(uid, b.artifacts[2]),
+                        a4_goblet: await parseArtifact(uid, b.artifacts[3]),
+                        a5_circlet: await parseArtifact(uid, b.artifacts[4]),
+                    };
+                })
+            );
+    
+            for (const build of parsedBuilds)
+            {
+                await dbInsertUserBuild(build);
+            }
 
-        for (let i = 0; i < parsedBuilds.length; i++) {
-            await dbInsertUserBuild(parsedBuilds[i]);
+            return parsedBuilds;
+        }
+        catch (error)
+        {
+            console.error("Error parsing builds:", error);
+            throw error;
         }
     }
 
-    async function parseArtifact(uid: number, artifact: any) {
-        const parsedArtifact = {
-            u_id: uid,
-            a_id: artifact.a_id,
-            mainstat: {
-                prop: artifact.mainstat.prop,
-                value: artifact.mainstat.value,
-            },
-            substats: artifact.substats.map((substat: any) => ({
-                prop: substat.prop,
-                value: substat.value,
-            })),
-        };
+    async function parseArtifact(uid: number, artifact: any)
+    {
+        if (!artifact)
+        {
+            console.warn("Missing artifact data");
+            return null;
+        }
 
-        const userArtifactId = await dbInsertUserArtifact(parsedArtifact);
-        return userArtifactId;
+        try
+        {
+            const parsedArtifact = {
+                u_id: uid,
+                a_id: artifact.a_id,
+                mainstat: {
+                    prop: artifact.mainstat.prop,
+                    value: artifact.mainstat.value,
+                },
+                substats: artifact.substats.map((substat: any) => ({
+                    prop: substat.prop,
+                    value: substat.value,
+                })),
+            };
+            
+            console.log("id: ", artifact.a_id);
+            const userArtifactId = await dbInsertUserArtifact(parsedArtifact);
+            return userArtifactId;
+        }
+        catch (error)
+        {
+            console.error("Error parsing artifact:", error);
+            throw error;
+        }     
     }
+
     app.get("/u/:uid", async (req, res) => {
         // step -1: fetch user data
-        const uid = req.params;
-        const user = await enka.fetchUser(uid.uid);
+        const uid = Number(req.params.uid);
+        const user = await enka.fetchUser(req.params.uid);
 
+        if (user.nickname)
+        {
+            dbInsertUser(uid, user.nickname);
+        }
+        else
+        {
+            console.warn("Failed to insert user:", user);
+        }
+        
         // step 0: get characters
         const characters = user.characters;
-
-        // testing
         // const c = characters[9];
 
         if (characters.length === 0) {
@@ -246,14 +279,17 @@ export function routes(app: Express, enka: EnkaClient) {
             };
         });
 
+        // await parseBuilds(uid, data);
+        res.json(data);
+
         // const data = {
         //     level: user.level,
         //     nickname: user.nickname,
         //     worldLevel: user.worldLevel,
         // };
 
-        parseBuilds(Number(uid.uid), data);
-        res.json(data);
+        // parseBuilds(Number(uid), data);
+        // res.json(data);
 
         // write to json file
         // fs.writeFile(
@@ -268,5 +304,4 @@ export function routes(app: Express, enka: EnkaClient) {
         //         res.send(`User data saved to user_${uid.uid}.json`);
         //     }
         // );
-    });
-}
+    });}

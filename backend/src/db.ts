@@ -17,6 +17,8 @@ let dbInsertArtifactStmt: Database.Statement;
 let dbInsertUserStmt: Database.Statement;
 let dbInsertUserArtifactStmt: Database.Statement;
 let dbInsertUserBuildStmt: Database.Statement;
+let dbFindExistingUserArtifactStmt: Database.Statement;
+let dbFindExistingUserBuildStmt: Database.Statement;
 
 /**
  * initialise database by creating creating and populating tables
@@ -27,7 +29,7 @@ let dbInsertUserBuildStmt: Database.Statement;
  * - user_artifacts: stores user artifact information (id, artifact id, mainstat, substats)
  * - user_builds: stores user build information (id, character id, weapon id, USER artifacts)
  */
-export function dbInit(enka: EnkaClient)
+export async function dbInit(enka: EnkaClient)
 {
     // UNIQUE(c_id, element) is for handling duplicate traveler c_ids
     db.exec
@@ -125,22 +127,22 @@ export function dbInit(enka: EnkaClient)
     prepareStatements();
 
     // populate tables with enka
-    populateTables(enka);
+    await populateTables(enka);
 }
 
 function prepareStatements()
 {
     dbSelectCharacterStmt = db.prepare
     (
-        `SELECT name FROM characters WHERE name = ?`
+        `SELECT name FROM characters WHERE c_id = ?`
     );
     dbSelectWeaponStmt = db.prepare
     (
-        `SELECT name FROM weapons WHERE name = ?`
+        `SELECT name FROM weapons WHERE w_id = ?`
     );
     dbSelectArtifactStmt = db.prepare
     (
-        `SELECT name FROM artifacts WHERE name = ?`
+        `SELECT name FROM artifacts WHERE a_id = ?`
     );
 
     // IGNORE is to prevent duplicate travelers (temporary workaaround)
@@ -170,7 +172,7 @@ function prepareStatements()
     );
     dbInsertUserStmt = db.prepare
     (
-        `INSERT INTO users
+        `INSERT OR REPLACE INTO users
         (
             u_id, nickname
         )
@@ -201,73 +203,104 @@ function prepareStatements()
         )
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
     );
+    // need to check IS NULL separately because NULL = NULL doesn't return true
+    dbFindExistingUserArtifactStmt = db.prepare
+    (
+        `SELECT id FROM user_artifacts 
+        WHERE u_id = ? AND a_id = ? AND 
+              mainstat_prop = ? AND mainstat_value = ? AND
+              (substat1_prop IS NULL OR substat1_prop = ?) AND 
+              (substat1_value IS NULL OR substat1_value = ?) AND
+              (substat2_prop IS NULL OR substat2_prop = ?) AND 
+              (substat2_value IS NULL OR substat2_value = ?) AND
+              (substat3_prop IS NULL OR substat3_prop = ?) AND 
+              (substat3_value IS NULL OR substat3_value = ?) AND
+              (substat4_prop IS NULL OR substat4_prop = ?) AND 
+              (substat4_value IS NULL OR substat4_value = ?)`
+    );
+    // checks id (not a_id)
+    dbFindExistingUserBuildStmt = db.prepare
+    (
+        `SELECT id FROM user_builds 
+        WHERE u_id = ? AND c_id = ? AND w_id = ? AND
+            a1_flower = ? AND
+            a2_feather = ? AND 
+            a3_sands = ? AND
+            a4_goblet = ? AND
+            a5_circlet = ?`
+    );
 }
 
-function populateTables(enka: EnkaClient)
+function populateTables(enka: EnkaClient): Promise<void>
 {
-    try
+    return new Promise((resolve, reject) =>
     {
-        // populate characters table
-        const characters = enka.getAllCharacters();
-        characters.forEach((c) =>
+        try
         {
-            const row = dbSelectCharacterStmt.get(c.name.get());
-            if (!row)
+            // populate characters table
+            const characters = enka.getAllCharacters();
+            characters.forEach((c) =>
             {
-                if (c.element)
+                const row = dbSelectCharacterStmt.get(c.id);
+                if (!row)
                 {
-                    dbInsertCharacterStmt.run(
-                        c.id,
-                        c.name.get(),
-                        c.icon.url || placeholder_url,
-                        c.stars,
-                        c.element.name.get(),
-                        c.weaponType
+                    if (c.element)
+                    {
+                        dbInsertCharacterStmt.run(
+                            c.id,
+                            c.name.get(),
+                            c.icon.url || placeholder_url,
+                            c.stars,
+                            c.element.name.get(),
+                            c.weaponType
+                        );
+                    }
+                }
+            });
+
+            // populate weapons table
+            const weapons = enka.getAllWeapons();
+            weapons.forEach((w) =>
+            {
+                const row = dbSelectWeaponStmt.get(w.id);
+                if (!row)
+                {
+                    dbInsertWeaponStmt.run(
+                        w.id,
+                        w.name.get(),
+                        w.icon.url || placeholder_url,
+                        w.stars,
+                        w.weaponType
                     );
                 }
-            }
-        });
+            });
 
-        // populate weapons table
-        const weapons = enka.getAllWeapons();
-        weapons.forEach((w) =>
-        {
-            const row = dbSelectWeaponStmt.get(w.name.get());
-            if (!row)
+            // populate artifacts table
+            const artifacts = enka.getAllArtifacts();
+            artifacts.forEach((a) =>
             {
-                dbInsertWeaponStmt.run(
-                    w.id,
-                    w.name.get(),
-                    w.icon.url || placeholder_url,
-                    w.stars,
-                    w.weaponType
-                );
-            }
-        });
-
-        // populate artifacts table
-        const artifacts = enka.getAllArtifacts();
-        artifacts.forEach((a) =>
+                const row = dbSelectArtifactStmt.get(a.id);
+                if (!row)
+                {
+                    dbInsertArtifactStmt.run(
+                        a.id,
+                        a.name.get(),
+                        a.icon.url || placeholder_url,
+                        a.stars,
+                        a.equipType,
+                        a.set.name.get()
+                    );
+                }
+            });
+            console.log("Populated tables");
+            resolve();
+        }
+        catch (error)
         {
-            const row = dbSelectArtifactStmt.get(a.name.get());
-            if (!row)
-            {
-                dbInsertArtifactStmt.run(
-                    a.id,
-                    a.name.get(),
-                    a.icon.url || placeholder_url,
-                    a.stars,
-                    a.equipType,
-                    a.set.name.get()
-                );
-            }
-        });
-    }
-    catch (error)
-    {
-        console.error("Error populating tables:", error);
-    }
-
+            console.error("Error populating tables:", error);
+            reject(error);
+        }
+    });
 }
 
 export function dbInsertCharacter
@@ -336,6 +369,17 @@ export function dbInsertUserArtifact(artifact: Artifact): Promise<number>
     {
         try
         {
+            // check if identical artifact already exists
+            const existingArtifactId = dbFindExistingUserArtifact(artifact);
+
+            if (existingArtifactId)
+            {
+                console.log(`Found existing artifact with ID ${existingArtifactId}`);
+                resolve(existingArtifactId);
+                return;
+            }
+            
+            // otherwise, insert new artifact
             const info = dbInsertUserArtifactStmt.run
             (
                 artifact.u_id,
@@ -353,20 +397,81 @@ export function dbInsertUserArtifact(artifact: Artifact): Promise<number>
             );
 
             // return last inserted user_artifact id (should be the one that this function just inserted)
+            console.log(`Inserted artifact with ID ${info.lastInsertRowid}`);
             resolve(info.lastInsertRowid as number);
         }
         catch (error)
         {
-            console.error(error);
+            console.error("Error inserting artifact:", error);
             reject(error);
         }
     });
 }
 
-export function dbInsertUserBuild(build: Build)
+export function dbInsertUserBuild(build: Build): Promise<number>
 {
-    dbInsertUserBuildStmt.run
+    return new Promise((resolve, reject) =>
+    {
+        try
+        {
+            // check if identical build already exists
+            const existingBuildId = dbFindExistingUserBuild(build);
+
+            if (existingBuildId)
+            {
+                console.log(`Found existing build with ID ${existingBuildId}`);
+                resolve(existingBuildId);
+                return;
+            }
+
+            // otherwise, insert new build
+            const info = dbInsertUserBuildStmt.run
+            (
+                build.u_id,
+                build.c_id,
+                build.w_id,
+                build.a1_flower,
+                build.a2_feather,
+                build.a3_sands,
+                build.a4_goblet,
+                build.a5_circlet
+            );
+
+            console.log(`Inserted new build with ID ${info.lastInsertRowid}`);
+            resolve(info.lastInsertRowid as number);
+        }
+        catch (error)
+        {
+            console.error("Error inserting build:", error);
+            reject(error);
+        }
+    });
+}
+
+export function dbFindExistingUserArtifact(artifact: Artifact): number | null
+{
+    const result = dbFindExistingUserArtifactStmt.get
     (
+        artifact.u_id,
+        artifact.a_id,
+        artifact.mainstat.prop,
+        artifact.mainstat.value,
+        artifact.substats[0]?.prop || null,
+        artifact.substats[0]?.value || null,
+        artifact.substats[1]?.prop || null,
+        artifact.substats[1]?.value || null,
+        artifact.substats[2]?.prop || null,
+        artifact.substats[2]?.value || null,
+        artifact.substats[3]?.prop || null,
+        artifact.substats[3]?.value || null
+    ) as { id: number } | undefined;
+
+    return result ? result.id : null;
+}
+
+export function dbFindExistingUserBuild(build: Build): number | null
+{
+    const result = dbFindExistingUserBuildStmt.get(
         build.u_id,
         build.c_id,
         build.w_id,
@@ -375,5 +480,7 @@ export function dbInsertUserBuild(build: Build)
         build.a3_sands,
         build.a4_goblet,
         build.a5_circlet
-    );
+    ) as { id: number } | undefined;
+
+    return result ? result.id : null;
 }

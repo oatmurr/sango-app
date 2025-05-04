@@ -29,8 +29,18 @@ async function initialise()
         // wait
         await new Promise(resolve => setTimeout(resolve, 1000));
 
+        // // Test with default parameter (undefined)
+        // const defaultArtifacts = enka.getAllArtifacts();
+        // console.log(`Default parameter: Got ${defaultArtifacts.length} Artifacts`);
+        
+        // // Sample the first few Artifacts
+        // console.log("Sample Artifacts (default):");
+        // defaultArtifacts.forEach(a => {
+        //     console.log(`- ${a.name.get()}, ID: ${a.id}, Rarity: ${a.stars}`);
+        // });
+
         console.log("Initialising...");
-        dbInit(enka);
+        await dbInit(enka);
         routes(app, enka);
 
         autoUpdateCache();
@@ -42,56 +52,6 @@ async function initialise()
 }
 
 initialise();
-
-// cache workaround for better-sqlite3 synchronicity
-// function cacheReady(): boolean
-// {
-//     try
-//     {
-//         const characters = enka.getAllCharacters();
-//         const weapons = enka.getAllWeapons();
-//         const artifacts = enka.getAllArtifacts();
-        
-//         if (characters.length > 0 && weapons.length > 0 && artifacts.length > 0)
-//         {
-//             return true;
-//         }
-//         return false
-//     }
-//     catch (error)
-//     {
-//         console.log("Cache not ready");
-//         return false;
-//     }
-// }
-
-// function waitCacheReady(maxAttempts: number, interval: number): Promise<void>
-// {
-//     return new Promise((resolve, reject) =>
-//     {
-//         let attempts = 0;
-
-//         const checkInterval = setInterval(() =>
-//         {
-//             if (cacheReady())
-//             {
-//                 clearInterval(checkInterval);
-//                 console.log("Cache ready");
-//                 resolve();
-//             }
-//             else
-//             {
-//                 attempts++;
-//                 if (attempts >= maxAttempts)
-//                 {
-//                     clearInterval(checkInterval);
-//                     console.error("Max attempts reached. Cache not ready.");
-//                     reject();
-//                 }
-//             }
-//         }, interval);
-//     });
-// }
 
 function autoUpdateCache()
 {
