@@ -279,11 +279,15 @@ function populateTables(enka: EnkaClient): Promise<void>
             const artifacts = enka.getAllArtifacts();
             artifacts.forEach((a) =>
             {
-                const row = dbSelectArtifactStmt.get(a.id);
+                // only use first four digits of a_id (fifth digit refers to number of starting substats)
+                const a_id = Math.floor(a.id / 10) % 10000;
+                console.log(a_id);
+
+                const row = dbSelectArtifactStmt.get(a_id);
                 if (!row)
                 {
                     dbInsertArtifactStmt.run(
-                        a.id,
+                        a_id,
                         a.name.get(),
                         a.icon.url || placeholder_url,
                         a.stars,
@@ -347,9 +351,12 @@ export function dbInsertArtifact
     a_set: string
 )
 {
+    // only use first four digits of a_id (fifth digit refers to number of starting substats)
+    const dba_id = Math.floor(a_id / 10) % 10000;
+    
     dbInsertArtifactStmt.run
     (
-        a_id, name, icon_url, rarity,
+        dba_id, name, icon_url, rarity,
         a_type, a_set
     );
 }
@@ -369,8 +376,16 @@ export function dbInsertUserArtifact(artifact: Artifact): Promise<number>
     {
         try
         {
+            // only use first four digits of a_id (fifth digit refers to number of starting substats)
+            const dba_id = Math.floor(artifact.a_id / 10) % 10000;
+            const dbArtifact =
+            {
+                ...artifact,
+                a_id: dba_id
+            }
+
             // check if identical artifact already exists
-            const existingArtifactId = dbFindExistingUserArtifact(artifact);
+            const existingArtifactId = dbFindExistingUserArtifact(dbArtifact);
 
             if (existingArtifactId)
             {
@@ -382,18 +397,18 @@ export function dbInsertUserArtifact(artifact: Artifact): Promise<number>
             // otherwise, insert new artifact
             const info = dbInsertUserArtifactStmt.run
             (
-                artifact.u_id,
-                artifact.a_id,
-                artifact.mainstat.prop,
-                artifact.mainstat.value,
-                artifact.substats[0]?.prop || null,
-                artifact.substats[0]?.value || null,
-                artifact.substats[1]?.prop || null,
-                artifact.substats[1]?.value || null,
-                artifact.substats[2]?.prop || null,
-                artifact.substats[2]?.value || null,
-                artifact.substats[3]?.prop || null,
-                artifact.substats[3]?.value || null
+                dbArtifact.u_id,
+                dbArtifact.a_id,
+                dbArtifact.mainstat.prop,
+                dbArtifact.mainstat.value,
+                dbArtifact.substats[0]?.prop || null,
+                dbArtifact.substats[0]?.value || null,
+                dbArtifact.substats[1]?.prop || null,
+                dbArtifact.substats[1]?.value || null,
+                dbArtifact.substats[2]?.prop || null,
+                dbArtifact.substats[2]?.value || null,
+                dbArtifact.substats[3]?.prop || null,
+                dbArtifact.substats[3]?.value || null
             );
 
             // return last inserted user_artifact id (should be the one that this function just inserted)

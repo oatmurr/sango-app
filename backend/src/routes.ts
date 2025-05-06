@@ -279,7 +279,7 @@ export function routes(app: Express, enka: EnkaClient)
             };
         });
 
-        // await parseBuilds(uid, data);
+        await parseBuilds(uid, data);
         res.json(data);
 
         // const data = {
