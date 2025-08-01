@@ -1,6 +1,7 @@
 import { Express } from "express";
 import { EnkaClient, ArtifactSet } from "enka-network-api";
-import { dbInsertUserBuild, dbInsertUserArtifact, dbInsertUser } from "./db";
+import { dbInsertUserBuild, dbInsertUserArtifact, dbInsertUser, dbGetUserBuild, dbGetCharacter, dbGetWeapon, dbGetUserArtifact, dbGetUserBuildsByUID, dbGetUser, dbGetArtifact } from "./db";
+import { BuildInput, ArtifactInput, User, Character, Weapon } from "./types";
 import { parse } from "path";
 
 export function routes(app: Express, enka: EnkaClient)
@@ -66,22 +67,24 @@ export function routes(app: Express, enka: EnkaClient)
     //     res.json({ message: "builds loaded successfully" });
     // });
 
-    async function parseBuilds(uid: number, builds: any)
+    async function parseBuilds(u_id: number, builds: any)
     {
         try
         {
             const parsedBuilds = await Promise.all(
                 builds.map(async (b: any) => {
-                    return {
-                        u_id: uid,
+                    const buildInput: BuildInput =
+                    {
+                        u_id: u_id,
                         c_id: b.attributes.c_id,
                         w_id: b.weapon.w_id,
-                        a1_flower: await parseArtifact(uid, b.artifacts[0]),
-                        a2_feather: await parseArtifact(uid, b.artifacts[1]),
-                        a3_sands: await parseArtifact(uid, b.artifacts[2]),
-                        a4_goblet: await parseArtifact(uid, b.artifacts[3]),
-                        a5_circlet: await parseArtifact(uid, b.artifacts[4]),
+                        ua_id_flower: await parseArtifact(u_id, b.artifacts[0]),
+                        ua_id_feather: await parseArtifact(u_id, b.artifacts[1]),
+                        ua_id_sands: await parseArtifact(u_id, b.artifacts[2]),
+                        ua_id_goblet: await parseArtifact(u_id, b.artifacts[3]),
+                        ua_id_circlet: await parseArtifact(u_id, b.artifacts[4]),
                     };
+                    return buildInput;
                 })
             );
     
@@ -99,18 +102,18 @@ export function routes(app: Express, enka: EnkaClient)
         }
     }
 
-    async function parseArtifact(uid: number, artifact: any)
+    async function parseArtifact(u_id: number, artifact: any): Promise<string>
     {
         if (!artifact)
         {
             console.warn("Missing artifact data");
-            return null;
         }
 
         try
         {
-            const parsedArtifact = {
-                u_id: uid,
+            const parsedArtifact: ArtifactInput = 
+            {
+                u_id: u_id,
                 a_id: artifact.a_id,
                 mainstat: {
                     prop: artifact.mainstat.prop,
@@ -133,14 +136,15 @@ export function routes(app: Express, enka: EnkaClient)
         }     
     }
 
-    app.get("/u/:uid", async (req, res) => {
+    app.get("/u/:user/fetch", async (req, res) =>
+    {
         // step -1: fetch user data
-        const uid = Number(req.params.uid);
-        const user = await enka.fetchUser(req.params.uid);
+        const u_id = Number(req.params.user);
+        const user = await enka.fetchUser(req.params.user);
 
         if (user.nickname)
         {
-            dbInsertUser(uid, user.nickname);
+            dbInsertUser(u_id, user.nickname);
         }
         else
         {
@@ -279,7 +283,7 @@ export function routes(app: Express, enka: EnkaClient)
             };
         });
 
-        await parseBuilds(uid, data);
+        await parseBuilds(u_id, data);
         res.json(data);
 
         // const data = {
@@ -304,4 +308,95 @@ export function routes(app: Express, enka: EnkaClient)
         //         res.send(`User data saved to user_${uid.uid}.json`);
         //     }
         // );
-    });}
+    });
+
+    app.get("/u/:user", async (req, res) =>
+    {
+        try
+        {
+            const u_id = Number(req.params.user);
+            const user = dbGetUser(u_id);
+            if (!user)
+            {
+                return res.status(404).json({ error: "User not found" });
+            }
+
+            const builds = dbGetUserBuildsByUID(u_id);
+
+            // list links
+            const buildLinks = builds.map(build =>
+            {
+                const character = dbGetCharacter(build.c_id);
+                const weapon = dbGetWeapon(build.w_id);
+
+                return {
+                    ub_id: build.ub_id,
+                    display_name: `${character?.name || "Unknown"} - ${weapon?.name || "Unknown"}`,
+                    link: `/b/${build.ub_id}`
+                };
+            });
+
+            res.json
+            ({
+                user:
+                {
+                    u_id: user.u_id,
+                    nickname: user.nickname
+                },
+                builds: buildLinks
+            });
+        }
+        catch (error)
+        {
+            console.error("Error fetching user:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    });
+
+    app.get("/b/:build", async (req, res) =>
+    {
+        try
+        {
+            const ub_id = req.params.build;
+            const build = dbGetUserBuild(ub_id);
+            if (!build)
+            {
+                return res.status(404).json({ error: "Build not found" });
+            }
+
+            // character
+            const character = dbGetCharacter(build.c_id);
+
+            // weapon
+            const weapon = dbGetWeapon(build.w_id);
+
+            // artifacts
+
+            res.json
+            ({
+                ub_id: build.ub_id,
+                character:
+                {
+                    name: character?.name,
+                    icon_url: character?.icon_url,
+                    rarity: character?.rarity,
+                    element: character?.element
+                },
+                weapon:
+                {
+                    name: weapon?.name,
+                    icon_url: weapon?.icon_url,
+                    rarity: weapon?.rarity,
+                    w_class: weapon?.w_class
+                }
+
+                // artifacts
+            });
+        }
+        catch (error)
+        {
+            console.error("Error fetching build:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    });
+}

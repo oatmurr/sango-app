@@ -1,6 +1,33 @@
 import Database from "better-sqlite3";
 import { EnkaClient } from "enka-network-api";
-import { Build, Artifact } from "./types";
+import { Build, Artifact, BuildInput, ArtifactInput, User, Character, Weapon } from "./types";
+import crypto from "crypto";
+
+function generateUserArtifactHash(artifact: ArtifactInput): string
+{
+    // sort substats for hashing to be consistent
+    const sortedSubstats = artifact.substats
+        .map(s => `${s.prop}:${s.value}`)
+        .sort()
+        .join('-');
+    
+    const hashString = `${artifact.u_id}-${artifact.a_id}-${artifact.mainstat.prop}-${artifact.mainstat.value}-${sortedSubstats}`;
+    return crypto.createHash('md5').update(hashString).digest('hex');
+}
+
+function generateUserBuildHash(build: BuildInput): string
+{
+    const sortedArtifacts = [
+        build.ua_id_flower,
+        build.ua_id_feather,
+        build.ua_id_sands,
+        build.ua_id_goblet,
+        build.ua_id_circlet
+    ].filter(id => id !== null && id !== undefined).sort().join('-');
+
+    const hashString = `${build.u_id}-${build.c_id}-${build.w_id}-${sortedArtifacts}`;
+    return crypto.createHash('md5').update(hashString).digest('hex');
+}
 
 const db = new Database("sango.db");
 
@@ -11,14 +38,20 @@ const placeholder_url =
 let dbSelectCharacterStmt: Database.Statement;
 let dbSelectWeaponStmt: Database.Statement;
 let dbSelectArtifactStmt: Database.Statement;
+let dbSelectUserArtifactStmt: Database.Statement;
+let dbSelectUserBuildStmt: Database.Statement;
+let dbSelectUserBuildsByUIDStmt: Database.Statement;
+let dbSelectUserStmt: Database.Statement;
+
 let dbInsertCharacterStmt: Database.Statement;
 let dbInsertWeaponStmt: Database.Statement;
 let dbInsertArtifactStmt: Database.Statement;
 let dbInsertUserStmt: Database.Statement;
 let dbInsertUserArtifactStmt: Database.Statement;
 let dbInsertUserBuildStmt: Database.Statement;
-let dbFindExistingUserArtifactStmt: Database.Statement;
-let dbFindExistingUserBuildStmt: Database.Statement;
+
+// let dbFindExistingUserArtifactStmt: Database.Statement;
+// let dbFindExistingUserBuildStmt: Database.Statement;
 
 /**
  * initialise database by creating creating and populating tables
@@ -82,7 +115,7 @@ export async function dbInit(enka: EnkaClient)
     (
         `CREATE TABLE IF NOT EXISTS user_artifacts
         (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ua_id TEXT PRIMARY KEY,
             u_id INTEGER,
             a_id INTEGER,
             mainstat_prop TEXT,
@@ -103,23 +136,23 @@ export async function dbInit(enka: EnkaClient)
     (
         `CREATE TABLE IF NOT EXISTS user_builds
         (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ub_id TEXT PRIMARY KEY,
             u_id INTEGER,
             c_id INTEGER,
             w_id INTEGER,
-            a1_flower INTEGER,
-            a2_feather INTEGER,
-            a3_sands INTEGER,
-            a4_goblet INTEGER,
-            a5_circlet INTEGER,
+            ua_id_flower TEXT,
+            ua_id_feather TEXT,
+            ua_id_sands TEXT,
+            ua_id_goblet TEXT,
+            ua_id_circlet TEXT,
             FOREIGN KEY (u_id) REFERENCES users(u_id),
             FOREIGN KEY (c_id) REFERENCES characters(c_id),
             FOREIGN KEY (w_id) REFERENCES weapons(w_id),
-            FOREIGN KEY (a1_flower) REFERENCES user_artifacts(id),
-            FOREIGN KEY (a2_feather) REFERENCES user_artifacts(id),
-            FOREIGN KEY (a3_sands) REFERENCES user_artifacts(id),
-            FOREIGN KEY (a4_goblet) REFERENCES user_artifacts(id),
-            FOREIGN KEY (a5_circlet) REFERENCES user_artifacts(id)
+            FOREIGN KEY (ua_id_flower) REFERENCES user_artifacts(ua_id),
+            FOREIGN KEY (ua_id_feather) REFERENCES user_artifacts(ua_id),
+            FOREIGN KEY (ua_id_sands) REFERENCES user_artifacts(ua_id),
+            FOREIGN KEY (ua_id_goblet) REFERENCES user_artifacts(ua_id),
+            FOREIGN KEY (ua_id_circlet) REFERENCES user_artifacts(ua_id)
         )`
     );
 
@@ -134,15 +167,31 @@ function prepareStatements()
 {
     dbSelectCharacterStmt = db.prepare
     (
-        `SELECT name FROM characters WHERE c_id = ?`
+        `SELECT * FROM characters WHERE c_id = ?`
     );
     dbSelectWeaponStmt = db.prepare
     (
-        `SELECT name FROM weapons WHERE w_id = ?`
+        `SELECT * FROM weapons WHERE w_id = ?`
     );
     dbSelectArtifactStmt = db.prepare
     (
-        `SELECT name FROM artifacts WHERE a_id = ?`
+        `SELECT * FROM artifacts WHERE a_id = ?`
+    );
+    dbSelectUserArtifactStmt = db.prepare
+    (
+        `SELECT * FROM user_artifacts WHERE ua_id = ?`
+    );
+    dbSelectUserBuildStmt = db.prepare
+    (
+        `SELECT * FROM user_builds WHERE ub_id = ?`
+    );
+    dbSelectUserBuildsByUIDStmt = db.prepare
+    (
+        `SELECT * FROM user_builds WHERE u_id = ?`
+    );
+    dbSelectUserStmt = db.prepare
+    (
+        `SELECT * FROM users WHERE u_id = ?`
     );
 
     // IGNORE is to prevent duplicate travelers (temporary workaaround)
@@ -182,6 +231,7 @@ function prepareStatements()
     (
         `INSERT INTO user_artifacts
         (
+            ua_id,
             u_id,
             a_id,
             mainstat_prop, mainstat_value,
@@ -190,45 +240,46 @@ function prepareStatements()
             substat3_prop, substat3_value,
             substat4_prop, substat4_value
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     );
     dbInsertUserBuildStmt = db.prepare
     (
         `INSERT INTO user_builds
         (
+            ub_id,
             u_id,
             c_id,
             w_id,
-            a1_flower, a2_feather, a3_sands, a4_goblet, a5_circlet
+            ua_id_flower, ua_id_feather, ua_id_sands, ua_id_goblet, ua_id_circlet
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
     );
-    // need to check IS NULL separately because NULL = NULL doesn't return true
-    dbFindExistingUserArtifactStmt = db.prepare
-    (
-        `SELECT id FROM user_artifacts 
-        WHERE u_id = ? AND a_id = ? AND 
-              mainstat_prop = ? AND mainstat_value = ? AND
-              (substat1_prop IS NULL OR substat1_prop = ?) AND 
-              (substat1_value IS NULL OR substat1_value = ?) AND
-              (substat2_prop IS NULL OR substat2_prop = ?) AND 
-              (substat2_value IS NULL OR substat2_value = ?) AND
-              (substat3_prop IS NULL OR substat3_prop = ?) AND 
-              (substat3_value IS NULL OR substat3_value = ?) AND
-              (substat4_prop IS NULL OR substat4_prop = ?) AND 
-              (substat4_value IS NULL OR substat4_value = ?)`
-    );
-    // checks id (not a_id)
-    dbFindExistingUserBuildStmt = db.prepare
-    (
-        `SELECT id FROM user_builds 
-        WHERE u_id = ? AND c_id = ? AND w_id = ? AND
-            a1_flower = ? AND
-            a2_feather = ? AND 
-            a3_sands = ? AND
-            a4_goblet = ? AND
-            a5_circlet = ?`
-    );
+    // // need to check IS NULL separately because NULL = NULL doesn't return true
+    // dbFindExistingUserArtifactStmt = db.prepare
+    // (
+    //     `SELECT id FROM user_artifacts 
+    //     WHERE u_id = ? AND a_id = ? AND 
+    //           mainstat_prop = ? AND mainstat_value = ? AND
+    //           (substat1_prop IS NULL OR substat1_prop = ?) AND 
+    //           (substat1_value IS NULL OR substat1_value = ?) AND
+    //           (substat2_prop IS NULL OR substat2_prop = ?) AND 
+    //           (substat2_value IS NULL OR substat2_value = ?) AND
+    //           (substat3_prop IS NULL OR substat3_prop = ?) AND 
+    //           (substat3_value IS NULL OR substat3_value = ?) AND
+    //           (substat4_prop IS NULL OR substat4_prop = ?) AND 
+    //           (substat4_value IS NULL OR substat4_value = ?)`
+    // );
+    // // checks id (not a_id)
+    // dbFindExistingUserBuildStmt = db.prepare
+    // (
+    //     `SELECT id FROM user_builds 
+    //     WHERE u_id = ? AND c_id = ? AND w_id = ? AND
+    //         a1_flower = ? AND
+    //         a2_feather = ? AND 
+    //         a3_sands = ? AND
+    //         a4_goblet = ? AND
+    //         a5_circlet = ?`
+    // );
 }
 
 function populateTables(enka: EnkaClient): Promise<void>
@@ -307,6 +358,41 @@ function populateTables(enka: EnkaClient): Promise<void>
     });
 }
 
+export function dbGetCharacter(c_id: number): Character | undefined
+{
+    return dbSelectCharacterStmt.get(c_id) as Character | undefined;
+}
+
+export function dbGetWeapon(w_id: number): Weapon | undefined
+{
+    return dbSelectWeaponStmt.get(w_id) as Weapon | undefined;
+}
+
+export function dbGetArtifact(a_id: number): Artifact | undefined
+{
+    return dbSelectArtifactStmt.get(a_id) as Artifact | undefined;
+}
+
+export function dbGetUserArtifact(ua_id: string): Artifact | undefined
+{
+    return dbSelectUserArtifactStmt.get(ua_id) as Artifact | undefined;
+}
+
+export function dbGetUserBuild(ub_id: string): Build | undefined
+{
+    return dbSelectUserBuildStmt.get(ub_id) as Build | undefined;
+}
+
+export function dbGetUserBuildsByUID(u_id: number): Build[]
+{
+    return dbSelectUserBuildsByUIDStmt.all(u_id) as Build[];
+}
+
+export function dbGetUser(u_id: number): User | undefined
+{
+    return dbSelectUserStmt.get(u_id) as User | undefined;
+}
+
 export function dbInsertCharacter
 (
     c_id: number,
@@ -369,7 +455,7 @@ export function dbInsertUser(u_id: number, nickname: string)
     );
 }
 
-export function dbInsertUserArtifact(artifact: Artifact): Promise<number>
+export function dbInsertUserArtifact(artifact: ArtifactInput): Promise<string>
 {
     // wrapped in Promise so build creation doesn't attempt to reference artifacts before they are inserted
     return new Promise((resolve, reject) =>
@@ -377,125 +463,156 @@ export function dbInsertUserArtifact(artifact: Artifact): Promise<number>
         try
         {
             // only use first four digits of a_id (fifth digit refers to number of starting substats)
-            const dba_id = Math.floor(artifact.a_id / 10) % 10000;
-            const dbArtifact =
-            {
-                ...artifact,
-                a_id: dba_id
-            }
+            const db_a_id = Math.floor(artifact.a_id / 10) % 10000;
+            // const dbArtifact =
+            // {
+            //     ...artifact,
+            //     a_id: dba_id
+            // }
 
-            // check if identical artifact already exists
-            const existingArtifactId = dbFindExistingUserArtifact(dbArtifact);
+            // // check if identical artifact already exists
+            // const existingArtifactId = dbFindExistingUserArtifact(dbArtifact);
 
-            if (existingArtifactId)
-            {
-                console.log(`Found existing artifact with ID ${existingArtifactId}`);
-                resolve(existingArtifactId);
-                return;
-            }
+            // if (existingArtifactId)
+            // {
+            //     console.log(`Found existing artifact with ID ${existingArtifactId}`);
+            //     resolve(existingArtifactId);
+            //     return;
+            // }
             
-            // otherwise, insert new artifact
-            const info = dbInsertUserArtifactStmt.run
+            // // otherwise, insert new artifact
+            // const info = dbInsertUserArtifactStmt.run
+
+            const ua_id = generateUserArtifactHash(artifact);
+            
+            dbInsertUserArtifactStmt.run
             (
-                dbArtifact.u_id,
-                dbArtifact.a_id,
-                dbArtifact.mainstat.prop,
-                dbArtifact.mainstat.value,
-                dbArtifact.substats[0]?.prop || null,
-                dbArtifact.substats[0]?.value || null,
-                dbArtifact.substats[1]?.prop || null,
-                dbArtifact.substats[1]?.value || null,
-                dbArtifact.substats[2]?.prop || null,
-                dbArtifact.substats[2]?.value || null,
-                dbArtifact.substats[3]?.prop || null,
-                dbArtifact.substats[3]?.value || null
+                ua_id,
+                artifact.u_id,
+                db_a_id,
+                artifact.mainstat.prop,
+                artifact.mainstat.value,
+                artifact.substats[0]?.prop || null,
+                artifact.substats[0]?.value || null,
+                artifact.substats[1]?.prop || null,
+                artifact.substats[1]?.value || null,
+                artifact.substats[2]?.prop || null,
+                artifact.substats[2]?.value || null,
+                artifact.substats[3]?.prop || null,
+                artifact.substats[3]?.value || null
             );
 
-            // return last inserted user_artifact id (should be the one that this function just inserted)
-            console.log(`Inserted artifact with ID ${info.lastInsertRowid}`);
-            resolve(info.lastInsertRowid as number);
+            // // return last inserted user_artifact id (should be the one that this function just inserted)
+            // console.log(`Inserted artifact with ID ${info.lastInsertRowid}`);
+            // resolve(info.lastInsertRowid as number);
+            console.log(`Attempting to insert artifact with hash ${ua_id}`);
+            resolve(ua_id);
         }
-        catch (error)
+        catch (error: any)
         {
-            console.error("Error inserting artifact:", error);
-            reject(error);
+            if (error.code === 'SQLITE_CONSTRAINT_PRIMARYKEY')
+            {
+                const ua_id = generateUserArtifactHash(artifact);
+                console.log(`Artifact already exists with hash ${ua_id}`);
+                resolve(ua_id);
+            }
+            else
+            {
+                console.error("Error inserting artifact:", error);
+                reject(error);
+            }
         }
     });
 }
 
-export function dbInsertUserBuild(build: Build): Promise<number>
+export function dbInsertUserBuild(build: BuildInput): Promise<string>
 {
     return new Promise((resolve, reject) =>
     {
         try
         {
-            // check if identical build already exists
-            const existingBuildId = dbFindExistingUserBuild(build);
+            // // check if identical build already exists
+            // const existingBuildId = dbFindExistingUserBuild(build);
 
-            if (existingBuildId)
-            {
-                console.log(`Found existing build with ID ${existingBuildId}`);
-                resolve(existingBuildId);
-                return;
-            }
+            // if (existingBuildId)
+            // {
+            //     console.log(`Found existing build with ID ${existingBuildId}`);
+            //     resolve(existingBuildId);
+            //     return;
+            // }
 
-            // otherwise, insert new build
-            const info = dbInsertUserBuildStmt.run
+            // // otherwise, insert new build
+            // const info = dbInsertUserBuildStmt.run
+
+            const ub_id = generateUserBuildHash(build);
+            dbInsertUserBuildStmt.run
             (
+                ub_id,
                 build.u_id,
                 build.c_id,
                 build.w_id,
-                build.a1_flower,
-                build.a2_feather,
-                build.a3_sands,
-                build.a4_goblet,
-                build.a5_circlet
+                build.ua_id_flower,
+                build.ua_id_feather,
+                build.ua_id_sands,
+                build.ua_id_goblet,
+                build.ua_id_circlet
             );
 
-            console.log(`Inserted new build with ID ${info.lastInsertRowid}`);
-            resolve(info.lastInsertRowid as number);
+            // console.log(`Inserted new build with ID ${info.lastInsertRowid}`);
+            // resolve(info.lastInsertRowid as number);
+            console.log(`Inserted new build with hash ${ub_id}`);
+            resolve(ub_id);
         }
-        catch (error)
+        catch (error: any)
         {
-            console.error("Error inserting build:", error);
-            reject(error);
+            if (error.code === 'SQLITE_CONSTRAINT_PRIMARYKEY')
+            {
+                const ub_id = generateUserBuildHash(build);
+                console.log(`Build already exists with hash ${ub_id}`);
+                resolve(ub_id);
+            }
+            else
+            {
+                console.error("Error inserting build:", error);
+                reject(error);
+            }
         }
     });
 }
 
-export function dbFindExistingUserArtifact(artifact: Artifact): number | null
-{
-    const result = dbFindExistingUserArtifactStmt.get
-    (
-        artifact.u_id,
-        artifact.a_id,
-        artifact.mainstat.prop,
-        artifact.mainstat.value,
-        artifact.substats[0]?.prop || null,
-        artifact.substats[0]?.value || null,
-        artifact.substats[1]?.prop || null,
-        artifact.substats[1]?.value || null,
-        artifact.substats[2]?.prop || null,
-        artifact.substats[2]?.value || null,
-        artifact.substats[3]?.prop || null,
-        artifact.substats[3]?.value || null
-    ) as { id: number } | undefined;
+// export function dbFindExistingUserArtifact(artifact: Artifact): number | null
+// {
+//     const result = dbFindExistingUserArtifactStmt.get
+//     (
+//         artifact.u_id,
+//         artifact.a_id,
+//         artifact.mainstat.prop,
+//         artifact.mainstat.value,
+//         artifact.substats[0]?.prop || null,
+//         artifact.substats[0]?.value || null,
+//         artifact.substats[1]?.prop || null,
+//         artifact.substats[1]?.value || null,
+//         artifact.substats[2]?.prop || null,
+//         artifact.substats[2]?.value || null,
+//         artifact.substats[3]?.prop || null,
+//         artifact.substats[3]?.value || null
+//     ) as { id: number } | undefined;
 
-    return result ? result.id : null;
-}
+//     return result ? result.id : null;
+// }
 
-export function dbFindExistingUserBuild(build: Build): number | null
-{
-    const result = dbFindExistingUserBuildStmt.get(
-        build.u_id,
-        build.c_id,
-        build.w_id,
-        build.a1_flower,
-        build.a2_feather,
-        build.a3_sands,
-        build.a4_goblet,
-        build.a5_circlet
-    ) as { id: number } | undefined;
+// export function dbFindExistingUserBuild(build: Build): number | null
+// {
+//     const result = dbFindExistingUserBuildStmt.get(
+//         build.u_id,
+//         build.c_id,
+//         build.w_id,
+//         build.a1_flower,
+//         build.a2_feather,
+//         build.a3_sands,
+//         build.a4_goblet,
+//         build.a5_circlet
+//     ) as { id: number } | undefined;
 
-    return result ? result.id : null;
-}
+//     return result ? result.id : null;
+// }
